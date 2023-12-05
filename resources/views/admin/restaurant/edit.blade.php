@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 @section('title')
-    Edit User
+    Edit Category
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -8,8 +8,8 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>Edit New User
-                        <a href="{{ url('admin/status/users') }}" class="btn btn-danger btn-sm float-end">
+                    <h3>Edit Status
+                        <a href="{{ url('admin/category/restaurant/list') }}" class="btn btn-danger btn-sm float-end">
                             Back
                         </a>
                     </h3>
@@ -25,30 +25,21 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('admin.status.users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.category.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
                             <div class="mb-3">
                                 <label>Name*</label>
-                                <input type="text" name="name" value="{{ $user->name }}" class="form-control" required />
+                                <input type="text" name="name" value="{{ $restaurant->name }}" class="form-control" disabled readonly/>
                                 @error('name') <small>{{ $message}}</small> @enderror
                             </div>
-                            <div class="mb-3">
-                                <label>Email*</label>
-                                <input type="text" name="email" value="{{ $user->email }}" class="form-control" />
-                                @error('email') <small>{{ $message}}</small> @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label>Password*</label>
-                                <input type="text" name="password" value="{{ $user->password }}" class="form-control" />
-                                @error('password') <small>{{ $message}}</small> @enderror
-                            </div>
+                 
                             <div class="mb-3">
                                 <label>Status*</label>
                                 <select name="status" class="form-control">
-                                    <option value="pending" {{ $user->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="active" {{ $user->status === 'active' ? 'selected' : '' }}>Active</option>
+                                    <option value="pending" {{ $restaurant->status === 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="active" {{ $restaurant->status === 'active' ? 'selected' : '' }}>Active</option>
                                 </select>
                                 @error('status') <small>{{ $message}}</small> @enderror
                             </div>

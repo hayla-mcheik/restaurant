@@ -19,13 +19,13 @@
                <div class="sb-nav-link-icon"><i class="feather-list"></i></div>
                Orders
             </a>
-             <a class="nav-link" href="{{ url('admin/list/category') }}">
+             <a class="nav-link" href="{{ url('admin/category/restaurant/list') }}">
                <div class="sb-nav-link-icon"><i class="feather-list"></i></div>
               category
             </a>
              <a class="nav-link" href="{{ url('admin/list/restaurant') }}">
                 <div class="sb-nav-link-icon"><i class="feather-list"></i></div>
-             Restaurant
+            List of Restaurant
              </a>
    
             <a class="nav-link" href="{{ url('admin/list/orders') }}">
