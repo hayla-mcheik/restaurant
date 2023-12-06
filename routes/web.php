@@ -59,8 +59,8 @@ Route::group(['middleware' => 'admin','prefix'=>'admin'],function () {
 
 Route::group(['middleware' => 'manager','prefix'=>'manager'],function () {
     Route::get('/dashboard', [DashboardController::class, 'managerdashboard'])->name('manager.dashboard');
-    Route::get('/restaurant/{id}', [RestaurantprofileController::class, 'index'])->name('manager.restaurant');
-    Route::put('/restaurant/update/{id}', [RestaurantprofileController::class, 'update'])->name('manager.restaurant.update');
+    // Route::get('/restaurant/{id}', [RestaurantprofileController::class, 'index'])->name('manager.restaurant');
+    // Route::put('/restaurant/update/{id}', [RestaurantprofileController::class, 'update'])->name('manager.restaurant.update');
 });
 
 Route::group(['middleware' => 'user','prefix'=>'user'],function () {

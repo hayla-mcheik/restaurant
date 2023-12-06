@@ -23,11 +23,10 @@ Restaurant Profile
         </ul>
     </div>
 @endif
-<form action="{{ route('manager.restaurant.update', $restaurant->id) }}" method="POST" enctype="multipart/form-data">
+<form method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
         <div class="row">
-
             <div class="col-md-6">
                 <div class="mb-3">
                     <label>Category*</label>
