@@ -32,7 +32,7 @@ class CategoryRestaurantController extends Controller
         $category->slug = Str::slug($request->input('slug'));
         $category->status = $request->has('status') ? '1' : '0';
         $category->save();
-        return redirect('admin.category.index')->with('success', "Category has been created successfully");
+        return redirect()->route('admin.category.index')->with('success', "Category has been created successfully");
     }
 
     public function edit($id)
@@ -48,7 +48,7 @@ class CategoryRestaurantController extends Controller
         $category->slug = Str::slug($request->input('slug'));
         $category->status = $request->has('status') ? '1' : '0';
         $category->update();
-        return redirect('admin.category.index')->with('success',"Category has been created successfully");
+        return redirect()->route('admin.category.index')->with('success',"Category has been updated successfully");
     }
 
     public function delete($id)
@@ -56,12 +56,12 @@ class CategoryRestaurantController extends Controller
         $category = RestaurantCategory::find($id);
     
         if(!$category) {
-            return redirect('admin.category.delete')->with('error', "Category not found");
+            return redirect()->route('admin.category.index')->with('error', "Category not found");
         }
     
         $category->delete();
     
-        return redirect('admin.category.delete')->with('success', "Category has been deleted successfully");
+        return redirect()->route('admin.category.index')->with('success', "Category has been deleted successfully");
     }
     
 }

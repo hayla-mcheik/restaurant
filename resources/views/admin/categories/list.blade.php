@@ -6,15 +6,19 @@ Categories list
 <div class="container-fluid">
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
+      
+     
                 <h3>Categories list
                     <a href="{{ route('admin.category.create') }}" class="btn btn-primary btn-sm float-end">
                         Add Category
 </a>
                 </h3>
-</div>
 
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Categories List</li>
+                 </ol>
+                 <div class="card">
 <div class="card-body">
 
  <table class="table table-sm table-bordered table-striped">
@@ -36,9 +40,9 @@ Categories list
         <td>{{ $value->slug }}</td>
         <td>
             @if($value->status == 1)
-                Active
+            <button disabled="" type="button" class="btn btn-sm btn-danger btn-round"> hide </button>
             @else
-                Hide
+            <button disabled="" type="button" class="btn btn-sm btn-success btn-round"> Active </button>
             @endif
         </td>
 

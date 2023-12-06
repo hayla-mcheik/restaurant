@@ -6,13 +6,29 @@ Users list
 <div class="container-fluid">
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
+     
                 <h3>Users list
                 </h3>
-</div>
 
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active">Users Status list</li>
+ </ol>
+ <div class="card">
 <div class="card-body">
+    @if($errors->any())
+    <div class="alert alert-warning">
+        @foreach($errors->all() as $error)
+            <div>{{ $error }} </div>
+        @endforeach
+    </div>
+    @if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+
+@endif
 
  <table class="table table-sm table-bordered table-striped">
     <thead>
@@ -31,7 +47,14 @@ Users list
         <td>{{ $value->id }}</td>
         <td>{{ $value->name }}</td>
         <td>{{ $value->email }}</td>
-        <td>{{ $value->status }}</td>
+        <td>
+            @if ($value->status == 'active')
+                <button disabled="" type="button" class="btn btn-sm btn-success btn-round">{{ $value->status }}</button>
+            @elseif ($value->status == 'pending')
+                <button disabled="" type="button" class="btn btn-sm btn-danger btn-round">{{ $value->status }}</button>
+            @endif
+        </td>
+        
 
         <td>
             <a href="{{ route('admin.status.users.edit', $value->id) }}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>

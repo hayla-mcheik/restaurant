@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('openninghours')->nullable();
             $table->string('deliverytime')->nullable();
-            $table->boolean('status');
+            $table->tinyInteger('status')->nullable()->default(1);
             $table->timestamps();
         });
     }

@@ -32,25 +32,16 @@
       <link href="{{ asset('admin/assets/css/styles.css') }}" rel="stylesheet" />
       <!-- Datatables css -->
       <link href="{{ asset('admin/assets/vendor/dataTables/dataTables/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-      @toastr_css
+   
 </head>
-
 <body class="sb-nav-fixed">
-
+    @include('layouts.admin.header')
     <div id="layoutSidenav">
         @include('layouts.admin.sidebar')
 <div id="layoutSidenav_content">
     <main>
-        @if(session('message'))
-    <div class="alert alert-success">
-        {{ session('message') }}
-    </div>
-@endif
-
         @yield('content')
     </main>
-
-
     @include('layouts.admin.footer')
 </div>
 </div>
@@ -81,40 +72,6 @@
 <script src="{{ asset('admin/assets/demo/datatables-demo.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
-    @if(Session::get('success'))
-	<script>
-    $(function() {
-    var Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000
-    });
 
-      Toast.fire({
-        icon: 'success',
-        title: "<h6 style='color:white'>{{ Session::get('success') }}</h6>",
-        background: '#20c997',
-        iconColor: 'white',
-        color:'white'
-      })
-    });
-          </script>
-
-<!-- Initialize Toastr -->
-<script>
-    // Ensure Toastr is available before calling Toastr() function
-    if (typeof Toastr === 'function') {
-        // Initialize Toastr options (customize as needed)
-        Toastr.options = {
-            closeButton: true,
-            progressBar: true,
-            positionClass: 'toast-top-right',
-            timeOut: 5000,
-        };
-    }
-</script>
-          @endif
-          @toastr_js
 </body>
 </html>

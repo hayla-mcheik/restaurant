@@ -6,13 +6,17 @@ Restaurant list
 <div class="container-fluid">
 <div class="row">
     <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
+  
+
                 <h3>Restaurant list
 
                 </h3>
-</div>
 
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
+    <li class="breadcrumb-item active">Restaurant list</li>
+ </ol>
+ <div class="card">
 <div class="card-body">
 
  <table class="table table-sm table-bordered table-striped">
@@ -32,19 +36,19 @@ Restaurant list
         <td>{{ $value->name }}</td>
         <td>
             @if($value->status == 1)
-                Pending
+            <button disabled="" type="button" class="btn btn-sm btn-danger btn-round"> Pending </button>
             @else
-                Approve
+            <button disabled="" type="button" class="btn btn-sm btn-success btn-round"> Approve </button>
             @endif
         </td>
 
         <td>
-            <a href="{{ route('admin.category.edit', $value->id) }}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>    
+            <a href="{{ route('admin.restaurant.edit', $value->id) }}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>    
 </td>
 </tr>
     @empty
     <tr>
-        <td colspan="5">No Restaurant Category Available</td>
+        <td colspan="5">No Restaurant Available</td>
 </tr>
     @endforelse
 

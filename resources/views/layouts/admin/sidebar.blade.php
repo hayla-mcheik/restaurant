@@ -12,24 +12,24 @@
                 Dashboard
              </a> 
              <a class="nav-link" href="{{ url('admin/status/users') }}">
-               <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
+               <div class="sb-nav-link-icon"><i class="feather-users"></i></div>
           Users Status
             </a> 
              <a class="nav-link" href="{{ url('admin/list/orders') }}">
-               <div class="sb-nav-link-icon"><i class="feather-list"></i></div>
+               <div class="sb-nav-link-icon"><i class="feather-shopping-bag"></i></div>
                Orders
             </a>
              <a class="nav-link" href="{{ url('admin/category/restaurant/list') }}">
-               <div class="sb-nav-link-icon"><i class="feather-list"></i></div>
+               <div class="sb-nav-link-icon"><i class="feather-grid"></i></div>
               category
             </a>
              <a class="nav-link" href="{{ url('admin/list/restaurant') }}">
-                <div class="sb-nav-link-icon"><i class="feather-list"></i></div>
+                <div class="sb-nav-link-icon"><i class="feather-clipboard"></i></div>
             List of Restaurant
              </a>
    
-            <a class="nav-link" href="{{ url('admin/list/orders') }}">
-               <div class="sb-nav-link-icon"><i class="feather-list"></i></div>
+            <a class="nav-link" href="{{ url('admin/list/menu') }}">
+               <div class="sb-nav-link-icon"><i class="feather-menu"></i></div>
                 Menu List
             </a>
         @else
@@ -43,11 +43,12 @@
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
      Orders Management
       </a> 
-
-      <a class="nav-link">
-         <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
-Restaurant Management
-      </a> 
+      
+      <a class="nav-link" href="{{ route('manager.restaurant', ['id' => $restaurant->id]) }}">
+         <div class="sb-nav-link-icon"><i class="feather-clipboard"></i></div>
+         Restaurant Management
+     </a>
+     
 
       <a class="nav-link">
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>

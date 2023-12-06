@@ -40,7 +40,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'status' => 'pending',
-            'role_as' => $this->getRoleAsValue($data['role_as']),
+            'role_as' => $this->getRoleAsValue($data['role_as'] ?? 'user'),
+
         ]);
     
         if ($user) {
@@ -64,6 +65,7 @@ class RegisterController extends Controller
                 return 3; 
         }
     }
+    
     
     public function register(Request $request)
     {

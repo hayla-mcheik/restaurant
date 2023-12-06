@@ -6,15 +6,17 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
+        
+          
                     <h3>Edit New Category
-                        <a href="{{ url('admin/category/restaurant/list') }}" class="btn btn-danger btn-sm float-end">
-                            Back
-                        </a>
+                 
                     </h3>
-                </div>
-
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('admin/category/restaurant/list') }}">Categories list</a></li>
+                        <li class="breadcrumb-item active">Edit Category</li>
+                     </ol>
+                    <div class="card">
                 <div class="card-body">
 
                     @if($errors->any())
@@ -29,33 +31,29 @@
                         @csrf
                         @method('PUT')
                         <div class="row">
+                            <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Name*</label>
-                                <input type="text" name="name" value="{{ $user->name }}" class="form-control" required />
+                                <input type="text" name="name" value="{{ $category->name }}" class="form-control" required />
                                 @error('name') <small>{{ $message}}</small> @enderror
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="mb-3">
-                                <label>Email*</label>
-                                <input type="text" name="email" value="{{ $user->email }}" class="form-control" />
-                                @error('email') <small>{{ $message}}</small> @enderror
-                            </div>
-                            <div class="mb-3">
-                                <label>Password*</label>
-                                <input type="text" name="password" value="{{ $user->password }}" class="form-control" />
-                                @error('password') <small>{{ $message}}</small> @enderror
-                            </div>
+                                <label>Slug*</label>
+                                <input type="text" name="slug" value="{{ $category->slug }}" class="form-control" />
+                                @error('slug') <small>{{ $message}}</small> @enderror
+                            </div>   
+                        </div>
                             <div class="mb-3">
                                 <label>Status*</label>
-                                <select name="status" class="form-control">
-                                    <option value="pending" {{ $user->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="active" {{ $user->status === 'active' ? 'selected' : '' }}>Active</option>
-                                </select>
-                                @error('status') <small>{{ $message}}</small> @enderror
-                            </div>
-                            
-
+                                <input  type="checkbox"  name="status"  {{ $category->status ? 'checked' : '' }} />
+                                </div>
+                                                     
                             <div class="col-md-12 mb-3">
-                                <button type="btn" class="btn btn-primary float-end">Submit</button>
+                                <button type="submit" class="btn btn-success float-end">
+                                    <i class="feather-send"></i> Save
+                                    </button>
                             </div>
                         </div>
                     </form>

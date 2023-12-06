@@ -6,9 +6,8 @@ Error
 <div class="row justify-content-center vh-100 align-items-center">
     <div class="col-lg-6">
         <div class="text-center mt-4">
-            <h1 class="display-1">401</h1>
-            <p class="lead">Unauthorized</p>
-            <p>Access to this resource is denied.</p>
+            <img class="mb-4 img-error" src=" {{ asset('admin/assets/img/error-404-monochrome.svg') }}" />
+            <p class="lead">This requested URL was not found on this server.</p>
             @php
                 $dashboardUrl = '';
                 switch (auth()->user()->role_as) {
@@ -33,5 +32,6 @@ Error
         </div>
     </div>
 </div>
+
 
 @endsection

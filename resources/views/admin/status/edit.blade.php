@@ -6,15 +6,18 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
+         
+        
                     <h3>Edit New User
-                        <a href="{{ url('admin/status/users') }}" class="btn btn-danger btn-sm float-end">
-                            Back
-                        </a>
+              
                     </h3>
-                </div>
-
+           
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('admin//status/users') }}">Users Status List</a></li>
+                        <li class="breadcrumb-item active">Edit Users Status</li>
+                     </ol>
+                     <div class="card">
                 <div class="card-body">
 
                     @if($errors->any())
@@ -25,25 +28,40 @@
                         </div>
                     @endif
 
+                    
+                    @if(session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+
+
                     <form action="{{ route('admin.status.users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="row">
+                            <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Name*</label>
                                 <input type="text" name="name" value="{{ $user->name }}" class="form-control" required />
                                 @error('name') <small>{{ $message}}</small> @enderror
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Email*</label>
                                 <input type="text" name="email" value="{{ $user->email }}" class="form-control" />
                                 @error('email') <small>{{ $message}}</small> @enderror
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Password*</label>
                                 <input type="text" name="password" value="{{ $user->password }}" class="form-control" />
                                 @error('password') <small>{{ $message}}</small> @enderror
                             </div>
+                        </div>
+                        <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Status*</label>
                                 <select name="status" class="form-control">
@@ -52,10 +70,12 @@
                                 </select>
                                 @error('status') <small>{{ $message}}</small> @enderror
                             </div>
-                            
+                        </div>
 
                             <div class="col-md-12 mb-3">
-                                <button type="btn" class="btn btn-primary float-end">Submit</button>
+                                <button type="submit" class="btn btn-success float-end">
+                                    <i class="feather-send"></i> Save
+                                    </button>
                             </div>
                         </div>
                     </form>

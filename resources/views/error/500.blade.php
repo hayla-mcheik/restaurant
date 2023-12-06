@@ -6,9 +6,8 @@ Error
 <div class="row justify-content-center vh-100 align-items-center">
     <div class="col-lg-6">
         <div class="text-center mt-4">
-            <h1 class="display-1">401</h1>
-            <p class="lead">Unauthorized</p>
-            <p>Access to this resource is denied.</p>
+            <h1 class="display-1">500</h1>
+            <p class="lead">Internal Server Error</p>
             @php
                 $dashboardUrl = '';
                 switch (auth()->user()->role_as) {

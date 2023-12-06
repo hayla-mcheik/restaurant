@@ -1,20 +1,20 @@
 @extends('layouts.admin.master')
 @section('title')
-    Edit Category
+    Edit Restaurant Status
 @endsection
 @section('content')
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
+      
                     <h3>Edit Status
-                        <a href="{{ url('admin/category/restaurant/list') }}" class="btn btn-danger btn-sm float-end">
-                            Back
-                        </a>
                     </h3>
-                </div>
-
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="{{ url('admin/category/restaurant/list') }}">Restaurant list</a></li>
+                        <li class="breadcrumb-item active">Edit Restaurant</li>
+                     </ol>
+                     <div class="card">
                 <div class="card-body">
 
                     @if($errors->any())
@@ -46,7 +46,9 @@
                             
 
                             <div class="col-md-12 mb-3">
-                                <button type="btn" class="btn btn-primary float-end">Submit</button>
+                                <button type="submit" class="btn btn-success float-end">
+                                    <i class="feather-send"></i> Save
+                                    </button>
                             </div>
                         </div>
                     </form>
