@@ -10,7 +10,7 @@ class RestaurantprofileController extends Controller
 {
     public function index()
     {
-        $restaurant = RestaurantModel::all();
+        $restaurant = RestaurantModel::first(); 
         $categories = RestaurantCategory::all();
 
         return view('manager.restaurant.index', compact('restaurant', 'categories'));
@@ -34,11 +34,19 @@ class RestaurantprofileController extends Controller
         'coverimage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'status' => 'nullable|boolean',
     ]);
-
-    $restaurant = RestaurantModel::firstOrNew(['id' => $request->id]);
-
-
-    // Handle file uploads
+    $restaurant = RestaurantModel::firstOrCreate([
+        'category_id' => $request->input('category_id'),
+        'name' => $request->input('name'),
+        'slug' => $request->input('slug'),
+        'address' => $request->input('address'),
+        'map' => $request->input('map'),
+        'phone' => $request->input('phone'),
+        'email' => $request->input('email'),
+        'openninghours' => $request->input('openninghours'),
+        'deliverytime' => $request->input('deliverytime'),
+        'status' => $request->input('status'),
+    ]);
+    
     if ($request->hasFile('image')) {
         if ($restaurant->image != null) unlink($restaurant->image);
         $image = $request->file('image');
@@ -60,11 +68,9 @@ class RestaurantprofileController extends Controller
     
         $restaurant->coverimage = $imagePath;
     }
-     // Fill the model with data
-     $restaurant->fill($validatedData);
 
-     // Save the changes
-     $restaurant->save();
+    $restaurant->update();
+
     return redirect()->route('manager.restaurant')->with('success', 'Restaurant  Updated Successfully');
 }
 

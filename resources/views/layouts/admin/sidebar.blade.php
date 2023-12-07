@@ -50,7 +50,7 @@
      </a>
      
 
-      <a class="nav-link">
+      <a class="nav-link" href={{ route('manager.menu.categories') }}>
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
 Menu Categories
       </a> 

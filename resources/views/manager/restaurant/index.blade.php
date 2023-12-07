@@ -33,23 +33,26 @@ Restaurant Profile
                     <select name="category_id" class="form-control">
                         <option value="" selected disabled>Select a Category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ optional($restaurant)->category_id == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
+                
             </div>
             
          <div class="col-md-6">
 <div class="mb-3">
 <label>Name*</label>
-<input type="text" name="name" value="{{ old('name') }}"  class="form-control"/>
+<input type="text" name="name"  value="{{ $restaurant->name ?? '' }}"  class="form-control"/>
 @error('name') <small>{{ $message}}</small> @enderror
 </div>
             </div>
             <div class="col-md-6">
 <div class="mb-3">
     <label>Slug*</label>
-    <input type="text" name="slug"  value="{{ old('slug') }}"  class="form-control"/>
+    <input type="text" name="slug"   value="{{ $restaurant->slug ?? '' }}"   class="form-control"/>
     @error('slug') <small>{{ $message}}</small> @enderror
     </div>
 </div>
@@ -57,7 +60,7 @@ Restaurant Profile
 <div class="col-md-6">
     <div class="mb-3">
         <label>Address*</label>
-        <input type="text" name="address"  value="{{ old('address') }}"  class="form-control"/>
+        <input type="text" name="address"   value="{{ $restaurant->address ?? '' }}"   class="form-control"/>
         @error('address') <small>{{ $message}}</small> @enderror
         </div>
     </div>
@@ -65,24 +68,16 @@ Restaurant Profile
     <div class="col-md-6">
         <div class="mb-3">
             <label>Map*</label>
-            <input type="text" name="map"  value="{{ old('map') }}"  class="form-control"/>
+            <input type="text" name="map"  value="{{ $restaurant->map ?? '' }}"  class="form-control"/>
             @error('map') <small>{{ $message}}</small> @enderror
             </div>
         </div>
-
-        <div class="col-md-6">
-            <div class="mb-3">
-                <label>Address*</label>
-                <input type="text" name="address"  value="{{ old('address') }}"  class="form-control"/>
-                @error('address') <small>{{ $message}}</small> @enderror
-                </div>
-            </div>
 
             
             <div class="col-md-6">
                 <div class="mb-3">
                     <label>Phone*</label>
-                    <input type="text" name="phone"  value="{{ old('phone') }}"  class="form-control"/>
+                    <input type="text" name="phone" value="{{ $restaurant->phone ?? '' }}"  class="form-control"/>
                     @error('phone') <small>{{ $message}}</small> @enderror
                     </div>
                 </div>
@@ -91,7 +86,7 @@ Restaurant Profile
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label>Email*</label>
-                        <input type="text" name="email"  value="{{ old('email') }}"  class="form-control"/>
+                        <input type="text" name="email" value="{{ $restaurant->email ?? '' }}"   class="form-control"/>
                         @error('email') <small>{{ $message}}</small> @enderror
                         </div>
                     </div>
@@ -99,7 +94,7 @@ Restaurant Profile
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label>Opening Hours*</label>
-                            <input type="text" name="openninghours"  value="{{ old('openninghours') }}"  class="form-control"/>
+                            <input type="text" name="openninghours"  value="{{ $restaurant->openninghours ?? '' }}"   class="form-control"/>
                             @error('openninghours') <small>{{ $message}}</small> @enderror
                             </div>
                         </div>
@@ -108,23 +103,29 @@ Restaurant Profile
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Delivery Time*</label>
-                                <input type="text" name="deliverytime"  value="{{ old('deliverytime') }}"  class="form-control"/>
+                                <input type="text" name="deliverytime" value="{{ $restaurant->deliverytime ?? '' }}"  class="form-control"/>
                                 @error('deliverytime') <small>{{ $message}}</small> @enderror
                                 </div>
                             </div>
     
-
                             <div class="mb-3">
                                 <label for="image">Image*</label>
                                 <input type="file" name="image" class="form-control" accept="image/*">
+                                @if($restaurant && $restaurant->image)
+                                    <img src="{{ asset($restaurant->image) }}" alt="Restaurant Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                @endif
                                 @error('image') <small>{{ $message }}</small> @enderror
                             </div>
-    
+                            
                             <div class="mb-3">
                                 <label for="coverimage">Cover Image*</label>
                                 <input type="file" name="coverimage" class="form-control" accept="image/*">
+                                @if($restaurant && $restaurant->coverimage)
+                                    <img src="{{ asset($restaurant->coverimage) }}" alt="Cover Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                @endif
                                 @error('coverimage') <small>{{ $message }}</small> @enderror
                             </div>
+                            
 
 
     <div class="mb-3">

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Manager\RestaurantprofileController;
 use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Manager\MenuCategoriesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,7 +34,6 @@ Route::group(['middleware' => 'admin','prefix'=>'admin'],function () {
     Route::put('/status/users/update/{id}', [StatusController::class, 'update'])->name('admin.status.users.update');
     Route::get('/status/users/delete/{id}', [StatusController::class, 'delete'])->name('admin.status.users.delete');
 
-
     Route::get('/category/restaurant/list', [CategoryRestaurantController::class, 'index'])->name('admin.category.index');
     Route::get('/category/restaurant/create', [CategoryRestaurantController::class, 'create'])->name('admin.category.create');
     Route::post('/category/restaurant/list', [CategoryRestaurantController::class, 'store'])->name('admin.category.store');
@@ -45,13 +45,9 @@ Route::group(['middleware' => 'admin','prefix'=>'admin'],function () {
     Route::get('/list/restaurant/edit/{id}', [RestaurantController::class, 'edit'])->name('admin.restaurant.edit');
     Route::PUT('/list/restaurant/update/{id}', [RestaurantController::class, 'update'])->name('admin.restaurant.update');
 
-
-
     Route::get('/list/orders', [OrderController::class, 'index'])->name('admin.orders.index');
     Route::get('/list/orders/{id}', [OrderController::class, 'show'])->name('admin.orders.view');
     Route::put('/list/orders/{id}', [OrderController::class, 'updateOrderStatus'])->name('admin.orders.update');
-
-
 
     Route::get('/list/menu', [MenuController::class, 'index'])->name('admin.menu.index');
     Route::get('/list/menu/{id}', [MenuController::class, 'show'])->name('admin.menu.view');
@@ -62,6 +58,14 @@ Route::group(['middleware' => 'manager','prefix'=>'manager'],function () {
     Route::get('/dashboard', [DashboardController::class, 'managerdashboard'])->name('manager.dashboard');
     Route::get('/restaurant', [RestaurantprofileController::class, 'index'])->name('manager.restaurant');
     Route::put('/restaurant/update', [RestaurantprofileController::class, 'update'])->name('manager.restaurant.update');
+
+    Route::get('/menu/categories', [MenuCategoriesController::class, 'index'])->name('manager.menu.categories');
+    Route::get('/menu/categories/create', [MenuCategoriesController::class, 'create'])->name('manager.menu.categories.create');
+    Route::post('/menu/categories', [MenuCategoriesController::class, 'store'])->name('manager.menu.categories.store');
+    Route::get('/menu/categories/edit/{id}', [MenuCategoriesController::class, 'edit'])->name('manager.menu.categories.edit');
+    Route::put('/menu/categories/{id}', [MenuCategoriesController::class, 'update'])->name('manager.menu.categories.update');
+    Route::get('/menu/categories/{id}', [MenuCategoriesController::class, 'destroy'])->name('manager.menu.categories.delete');
+   
 });
 
 Route::group(['middleware' => 'user','prefix'=>'user'],function () {
