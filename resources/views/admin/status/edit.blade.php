@@ -43,7 +43,7 @@
                             <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Name*</label>
-                                <input type="text" name="name" value="{{ $user->name }}" class="form-control" required />
+                                <input type="text" name="name" value="{{ $user->name }}" class="form-control" />
                                 @error('name') <small>{{ $message}}</small> @enderror
                             </div>
                         </div>

@@ -24,15 +24,18 @@ class CategoryRestaurantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
+            'name' => 'required|string|max:255',
             'slug' => 'required|max:255|unique:restaurant_categories,slug',
+            'status' => 'nullable|boolean',
         ]);
+    
         $category = new RestaurantCategory();
         $category->name = $request->input('name');
         $category->slug = Str::slug($request->input('slug'));
         $category->status = $request->has('status') ? '1' : '0';
         $category->save();
-        return redirect()->route('admin.category.index')->with('success', "Category has been created successfully");
+    
+        return redirect()->route('admin.category.index')->with('success', 'Category has been created successfully');
     }
 
     public function edit($id)
@@ -41,14 +44,26 @@ class CategoryRestaurantController extends Controller
         return view('admin.categories.edit',compact('category'));
     }
 
-    public function update(Request $request , $id)
+    public function update(Request $request, $id)
     {
         $category = RestaurantCategory::find($id);
+    
+        if (!$category) {
+            return redirect()->route('admin.category.index')->with('error', 'Category not found');
+        }
+    
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'slug' => 'required|max:255|unique:restaurant_categories,slug,' . $id,
+            'status' => 'nullable|boolean',
+        ]);
+    
         $category->name = $request->input('name');
         $category->slug = Str::slug($request->input('slug'));
         $category->status = $request->has('status') ? '1' : '0';
         $category->update();
-        return redirect()->route('admin.category.index')->with('success',"Category has been updated successfully");
+    
+        return redirect()->route('admin.category.index')->with('success', 'Category has been updated successfully');
     }
 
     public function delete($id)

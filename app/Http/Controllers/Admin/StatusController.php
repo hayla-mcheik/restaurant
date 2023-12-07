@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Mail\AccountActivatedNotification; 
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+
 class StatusController extends Controller
 {
     public function index()
@@ -22,30 +24,37 @@ class StatusController extends Controller
         $user = User::find($id);   
         return view('admin.status.edit',compact('user'));
     }
+
+
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-
-        if ($user) {
-            $previousStatus = $user->status;
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->password = $request->input('password');
-            $user->status = $request->input('status');
-            $user->update();
-
-            if ($previousStatus === 'pending' && $user->status === 'active') {
-                // info('Sending email to: ' . $user->email);
-                Mail::to($user->email)->send(new AccountActivatedNotification($user->name));
-                // info('Email sent successfully!');
-            }
-            
-
-            return redirect()->route('admin.status.users')->with('success', 'User Status Updated Successfully');
-        } else {
+    
+        if (!$user) {
             return redirect()->route('admin.status.users')->with('error', 'User not found');
         }
+    
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'password' => 'required|string|min:8',
+            'status' => 'required|in:pending,active',
+        ]);
+    
+        $previousStatus = $user->status;
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->status = $request->input('status');
+        $user->update();
+    
+        if ($previousStatus === 'pending' && $user->status === 'active') {
+            Mail::to($user->email)->send(new AccountActivatedNotification($user->name));
+        }
+    
+        return redirect()->route('admin.status.users')->with('success', 'User Status Updated Successfully');
     }
+    
 
 public function delete($id)
 {

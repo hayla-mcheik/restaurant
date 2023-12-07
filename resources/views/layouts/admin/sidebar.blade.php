@@ -43,11 +43,11 @@
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
      Orders Management
       </a> 
-
-      {{-- <a class="nav-link" href="{{ route('manager.restaurant', ['id' => $restaurant->id]) }}">
+      
+      <a class="nav-link" href="{{ route('manager.restaurant') }}">
          <div class="sb-nav-link-icon"><i class="feather-clipboard"></i></div>
          Restaurant Management
-     </a> --}}
+     </a>
      
 
       <a class="nav-link">

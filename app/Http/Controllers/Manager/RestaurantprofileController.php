@@ -5,18 +5,19 @@ namespace App\Http\Controllers\Manager;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\RestaurantCategory;
+use App\Models\RestaurantModel;
 class RestaurantprofileController extends Controller
 {
-    public function index($id)
+    public function index()
     {
-        $restaurant = RestaurantModel::findOrFail($id);
+        $restaurant = RestaurantModel::all();
         $categories = RestaurantCategory::all();
 
         return view('manager.restaurant.index', compact('restaurant', 'categories'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
 {
     // Validate the request
     $validatedData = $request->validate([
@@ -34,8 +35,8 @@ class RestaurantprofileController extends Controller
         'status' => 'nullable|boolean',
     ]);
 
-    $restaurant = RestaurantModel::findOrFail($id);
-    $restaurant->update($validatedData);
+    $restaurant = RestaurantModel::firstOrNew(['id' => $request->id]);
+
 
     // Handle file uploads
     if ($request->hasFile('image')) {
@@ -59,8 +60,12 @@ class RestaurantprofileController extends Controller
     
         $restaurant->coverimage = $imagePath;
     }
+     // Fill the model with data
+     $restaurant->fill($validatedData);
 
-    return redirect()->route('manager.restaurant.index')->with('success', 'Restaurant  Updated Successfully');
+     // Save the changes
+     $restaurant->save();
+    return redirect()->route('manager.restaurant')->with('success', 'Restaurant  Updated Successfully');
 }
 
 }

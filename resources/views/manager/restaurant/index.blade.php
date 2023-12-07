@@ -23,7 +23,7 @@ Restaurant Profile
         </ul>
     </div>
 @endif
-<form method="POST" enctype="multipart/form-data">
+<form action="{{ route('manager.restaurant.update') }}" method="POST" enctype="multipart/form-data">
     @csrf
     @method('PUT')
         <div class="row">
@@ -108,8 +108,8 @@ Restaurant Profile
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label>Delivery Time*</label>
-                                <input type="text" name="openninghours"  value="{{ old('openninghours') }}"  class="form-control"/>
-                                @error('openninghours') <small>{{ $message}}</small> @enderror
+                                <input type="text" name="deliverytime"  value="{{ old('deliverytime') }}"  class="form-control"/>
+                                @error('deliverytime') <small>{{ $message}}</small> @enderror
                                 </div>
                             </div>
     

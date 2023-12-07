@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\RestaurantController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Manager\RestaurantprofileController;
+use App\Http\Controllers\Frontend\IndexController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,30 +60,13 @@ Route::group(['middleware' => 'admin','prefix'=>'admin'],function () {
 
 Route::group(['middleware' => 'manager','prefix'=>'manager'],function () {
     Route::get('/dashboard', [DashboardController::class, 'managerdashboard'])->name('manager.dashboard');
-    // Route::get('/restaurant/{id}', [RestaurantprofileController::class, 'index'])->name('manager.restaurant');
-    // Route::put('/restaurant/update/{id}', [RestaurantprofileController::class, 'update'])->name('manager.restaurant.update');
+    Route::get('/restaurant', [RestaurantprofileController::class, 'index'])->name('manager.restaurant');
+    Route::put('/restaurant/update', [RestaurantprofileController::class, 'update'])->name('manager.restaurant.update');
 });
 
 Route::group(['middleware' => 'user','prefix'=>'user'],function () {
     Route::get('/dashboard', [DashboardController::class, 'userdashboard'])->name('user.dashboard');
 });
 
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware('auth')->name('verification.notice');
-
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware(['auth'])->name('verification.notice');
-
-// Route::get('/email/verify/{id}/{hash}', function (\Illuminate\Http\Request $request) {
-//     $request->user()->markEmailAsVerified();
-//     return redirect('/home');
-// })->middleware(['auth', 'signed'])->name('verification.verify');
-
-// Route::post('/email/verification-notification', function (\Illuminate\Http\Request $request) {
-//     $request->user()->sendEmailVerificationNotification();
-//     return back()->with('verification_notice', true);
-// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [IndexController::class, 'index'])->name('home.index');
