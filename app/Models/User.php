@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,13 +17,29 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'image',
         'name',
+        'lname',
+        'phone',
+        'info',
         'email',
+        'currentemail',
         'password',
+        'currentpassword',
         'role_as',
         'status',
     ];
 
+
+public function orders()
+{
+    return $this->hasMany(OrderModel::class);
+}
+
+public function restaurant()
+{
+    return $this->hasOne(RestaurantModel::class, 'user_id'); 
+}
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -43,4 +59,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function markEmailAsVerified()
+    {
+        $this->email_verified_at = now();
+        $this->save();
+    }
 }

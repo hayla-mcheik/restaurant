@@ -7,7 +7,8 @@
 </head>
 <body>
     <p>Dear {{ $username }},</p>
-    <p>Thank you for signing up, your account is under review, once approved, you will receive an email. </p>
+    <p>Thank you for signing up. Please verify your account:</p>
+    <a href="{{ route('verification.verify') }}">Verify your account</a>
     <p>Best Regards,</p>
     <p>Restaurant Team</p>
 </body>

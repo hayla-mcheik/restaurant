@@ -17,7 +17,13 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->tinyInteger('role_as')->default('3')->comment('1=admin,2=manager,3=user');
+            $table->string('lname')->nullable();
+            $table->string('image')->nullable();
+            $table->string('currentemail')->nullable();
+            $table->string('currentpassword')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('info')->nullable();
+            $table->tinyInteger('role_as')->default('1')->comment('1=admin,2=manager,3=user');
             $table->string('status')->default('pending')->comment('pending, approved');
             $table->rememberToken();
             $table->timestamps();

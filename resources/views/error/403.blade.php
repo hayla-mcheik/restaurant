@@ -9,26 +9,11 @@ Error
             <h1 class="display-1">401</h1>
             <p class="lead">Unauthorized</p>
             <p>Access to this resource is denied.</p>
-            @php
-                $dashboardUrl = '';
-                switch (auth()->user()->role_as) {
-                    case 1:
-                        $dashboardUrl = url('admin/dashboard');
-                        break;
-                    case 2:
-                        $dashboardUrl = url('manager/dashboard');
-                        break;
-                    case 3:
-                        $dashboardUrl = url('user/dashboard');
-                        break;
-                    default:
-                        break;
-                }
-            @endphp
 
-            <a href="{{ $dashboardUrl }}">
+
+            <a href="{{ route('login') }}">
                 <i class="fas fa-arrow-left mr-1"></i>
-                Return to Dashboard
+                Return to Login
             </a>
         </div>
     </div>

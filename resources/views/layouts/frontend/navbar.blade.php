@@ -7,7 +7,7 @@
        <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
              </li>
              <li class="nav-item">
                 <a class="nav-link" href="offers.html"><i class="icofont-sale-discount"></i> Offers <span class="badge badge-danger">New</span></a>
@@ -29,8 +29,6 @@
                 <div class="dropdown-menu dropdown-menu-right shadow-sm border-0">
                    <a class="dropdown-item" href="track-order.html">Track Order</a>
                    <a class="dropdown-item" href="invoice.html">Invoice</a>
-                   <a class="dropdown-item" href="login.html">Login</a>
-                   <a class="dropdown-item" href="register.html">Register</a>
                    <a class="dropdown-item" href="404.html">404</a>
                    <a class="dropdown-item" href="extra.html">Extra :)</a>
                 </div>
@@ -59,6 +57,14 @@
                      <a class="dropdown-item" href="orders.html#favourites"><i class="icofont-heart"></i> Favourites</a>
                      <a class="dropdown-item" href="orders.html#payments"><i class="icofont-credit-card"></i> Payments</a>
                      <a class="dropdown-item" href="orders.html#addresses"><i class="icofont-location-pin"></i> Addresses</a>
+                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        <i class="fas fa-sign-out-alt"></i> {{ __('Logout') }}
+                    </a>
+                    
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                    
                  </div>
              </li>
          @endguest

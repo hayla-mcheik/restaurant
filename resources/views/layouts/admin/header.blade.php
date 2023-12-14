@@ -1,13 +1,10 @@
 <nav class="sb-topnav navbar navbar-expand navbar-light bg-white shadow-sm">
-    <a class="navbar-brand" href="index.html"><img alt="logo" src="{{ asset('admin/assets/img/logo.png') }}"></a>
+    <a class="navbar-brand" href="{{ url('/') }}"><img alt="logo" src="{{ asset('admin/assets/img/logo.png') }}"></a>
     <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
        <div class="input-group">
-          <input class="form-control" type="text" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-          <div class="input-group-append">
-             <button class="btn btn-primary btn-sm" type="button"><i class="feather-search"></i></button>
-          </div>
+     
        </div>
     </form>
     <!-- Navbar-->
@@ -144,13 +141,31 @@
                    <div class="status-indicator bg-success"></div>
                 </div>
                 <div class="font-weight-bold">
-                   <div class="text-truncate">Gurdeep Osahan</div>
-                   <div class="small text-gray-500">Restaurants Owner</div>
+                   <div class="text-truncate">{{ auth()->user()->name }} {{ auth()->user()->lname }}</div>
+
+                   @if(auth()->user()->role_as == 1)
+                   <div class="small text-gray-500">Admin Owner</div>
+               @elseif(auth()->user()->role_as == 2)
+                   <div class="small text-gray-500">Restaurant Owner</div>
+               @elseif(auth()->user()->role_as == 3)
+                   <div class="small text-gray-500">User Owner</div>
+               @else
+                   <div class="small text-gray-500">Unknown Role</div>
+               @endif
+
+
                 </div>
              </div>
              <div class="dropdown-divider"></div>
-             <a class="dropdown-item" href="my-profile.html"><i class="feather-edit"></i> My Account</a>
-             <a class="dropdown-item" href="my-profile.html"><i class="feather-settings"></i> Account Settings</a>
+
+             @if(auth()->user()->role_as == '1')
+             <a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="feather-edit"></i> My Account</a>
+         @elseif(auth()->user()->role_as == '2')
+             <a class="dropdown-item" href="{{ url('manager/profile') }}"><i class="feather-edit"></i> My Account</a>
+         @elseif(auth()->user()->role_as == '3')
+             <a class="dropdown-item" href="{{ url('user/profile') }}"><i class="feather-edit"></i> My Account</a>
+         @endif
+         
              <div class="dropdown-divider"></div>
 
              <a class="dropdown-item" href="{{ route('logout') }}"

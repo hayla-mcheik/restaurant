@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('restaurant', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->constrained('restaurant_categories')->onDelete('cascade');
-            $table->text('image')->nullable();
-            $table->text('coverimage')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->string('address')->nullable();
@@ -24,7 +23,10 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('openninghours')->nullable();
             $table->string('deliverytime')->nullable();
-            $table->tinyInteger('status')->nullable()->default(1);
+            $table->tinyInteger('status')->nullable()->default(0);
+            $table->tinyInteger('popular')->nullable()->default(0);
+            $table->text('image')->nullable();
+            $table->text('coverimage')->nullable();
             $table->timestamps();
         });
     }

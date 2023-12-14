@@ -45,14 +45,14 @@ Restaurant Profile
          <div class="col-md-6">
 <div class="mb-3">
 <label>Name*</label>
-<input type="text" name="name"  value="{{ $restaurant->name ?? '' }}"  class="form-control"/>
+<input type="text" name="name" value="{{ old('name', $restaurant->name ?? '') }}"   class="form-control"/>
 @error('name') <small>{{ $message}}</small> @enderror
 </div>
             </div>
             <div class="col-md-6">
 <div class="mb-3">
     <label>Slug*</label>
-    <input type="text" name="slug"   value="{{ $restaurant->slug ?? '' }}"   class="form-control"/>
+    <input type="text" name="slug"   value="{{ old('slug', $restaurant->slug ?? '') }}"   class="form-control"/>
     @error('slug') <small>{{ $message}}</small> @enderror
     </div>
 </div>
@@ -60,7 +60,7 @@ Restaurant Profile
 <div class="col-md-6">
     <div class="mb-3">
         <label>Address*</label>
-        <input type="text" name="address"   value="{{ $restaurant->address ?? '' }}"   class="form-control"/>
+        <input type="text" name="address"   value="{{ old('address', $restaurant->address ?? '') }}"   class="form-control"/>
         @error('address') <small>{{ $message}}</small> @enderror
         </div>
     </div>
@@ -68,7 +68,7 @@ Restaurant Profile
     <div class="col-md-6">
         <div class="mb-3">
             <label>Map*</label>
-            <input type="text" name="map"  value="{{ $restaurant->map ?? '' }}"  class="form-control"/>
+            <input type="text" name="map"  value="{{ old('map',$restaurant->map ?? '') }}"  class="form-control"/>
             @error('map') <small>{{ $message}}</small> @enderror
             </div>
         </div>
@@ -77,7 +77,7 @@ Restaurant Profile
             <div class="col-md-6">
                 <div class="mb-3">
                     <label>Phone*</label>
-                    <input type="text" name="phone" value="{{ $restaurant->phone ?? '' }}"  class="form-control"/>
+                    <input type="text" name="phone" value="{{ old('phone', $restaurant->phone ?? '') }}"  class="form-control"/>
                     @error('phone') <small>{{ $message}}</small> @enderror
                     </div>
                 </div>
@@ -86,27 +86,29 @@ Restaurant Profile
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label>Email*</label>
-                        <input type="text" name="email" value="{{ $restaurant->email ?? '' }}"   class="form-control"/>
+                        <input type="text" name="email" value="{{ old('email', $restaurant->email ?? '') }}"   class="form-control"/>
                         @error('email') <small>{{ $message}}</small> @enderror
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label>Opening Hours*</label>
-                            <input type="text" name="openninghours"  value="{{ $restaurant->openninghours ?? '' }}"   class="form-control"/>
-                            @error('openninghours') <small>{{ $message}}</small> @enderror
+                            <label>Delivery Time*</label>
+                            <input type="text" name="deliverytime" value="{{ old('deliverytime', $restaurant->deliverytime ?? '') }}"  class="form-control"/>
+                            @error('deliverytime') <small>{{ $message}}</small> @enderror
                             </div>
                         </div>
-
-                        
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label>Delivery Time*</label>
-                                <input type="text" name="deliverytime" value="{{ $restaurant->deliverytime ?? '' }}"  class="form-control"/>
-                                @error('deliverytime') <small>{{ $message}}</small> @enderror
+                            <div class="col-md-6">
+                               <div class="form-group">
+                                  <label>Opening Hours*</label>
+                                  <textarea style="height:100px;" class="form-control" value="{{ old('openninghours',$restaurant->openninghours ?? '') }}"  name="openninghours" placeholder="Personal info">{{ old('openninghours', $restaurant->openninghours ?? '') }} </textarea>
+                                  @error('openninghours') <small>{{ $message}}</small> @enderror
                                 </div>
                             </div>
+                      
+
+                        
+             
     
                             <div class="mb-3">
                                 <label for="image">Image*</label>
@@ -124,14 +126,19 @@ Restaurant Profile
                                     <img src="{{ asset($restaurant->coverimage) }}" alt="Cover Image" class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                                 @endif
                                 @error('coverimage') <small>{{ $message }}</small> @enderror
+                            </div>                         
+
+                            <div class="mb-3">
+                                <label>Status*</label>
+                                <input type="checkbox" name="status" {{ $restaurant->status ? 'checked' : '' }} />
                             </div>
                             
-
-
-    <div class="mb-3">
-        <label>Status*</label>
-        <input  type="checkbox"  name="status"  />
-        </div>
+                            <div class="mb-3">
+                                <label>Popular*</label>
+                                <input type="checkbox" name="popular" {{ $restaurant->popular ? 'checked' : '' }} />
+                            </div>
+                            
+    
 
         <div class="col-md-12 mb-3">
             <button type="submit" class="btn btn-success float-end">

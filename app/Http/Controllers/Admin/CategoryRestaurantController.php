@@ -26,15 +26,27 @@ class CategoryRestaurantController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|max:255|unique:restaurant_categories,slug',
-            'status' => 'nullable|boolean',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'nullable',
         ]);
     
         $category = new RestaurantCategory();
         $category->name = $request->input('name');
         $category->slug = Str::slug($request->input('slug'));
         $category->status = $request->has('status') ? '1' : '0';
-        $category->save();
-    
+
+        if ($request->hasFile('image')) {
+            if ($category->image != null) unlink($category->image);
+            $image = $request->file('image');
+            $fileName = time() . rand(1000, 50000) . '.' . $image->getClientOriginalExtension();
+            $image->move('upload/restaurantcategory', $fileName);
+        
+            $imagePath = 'upload/restaurant/' . $fileName;
+        
+            $category->image = $imagePath;
+        }
+
+        $category->save();    
         return redirect()->route('admin.category.index')->with('success', 'Category has been created successfully');
     }
 
@@ -55,12 +67,23 @@ class CategoryRestaurantController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|max:255|unique:restaurant_categories,slug,' . $id,
-            'status' => 'nullable|boolean',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'nullable',
         ]);
     
         $category->name = $request->input('name');
         $category->slug = Str::slug($request->input('slug'));
         $category->status = $request->has('status') ? '1' : '0';
+        if ($request->hasFile('image')) {
+            if ($category->image != null) unlink($category->image);
+            $image = $request->file('image');
+            $fileName = time() . rand(1000, 50000) . '.' . $image->getClientOriginalExtension();
+            $image->move('upload/restaurantcategory', $fileName);
+        
+            $imagePath = 'upload/restaurant/' . $fileName;
+        
+            $category->image = $imagePath;
+        }
         $category->update();
     
         return redirect()->route('admin.category.index')->with('success', 'Category has been updated successfully');
@@ -69,7 +92,7 @@ class CategoryRestaurantController extends Controller
     public function delete($id)
     {
         $category = RestaurantCategory::find($id);
-    
+    $category->restaurants()->delete();
         if(!$category) {
             return redirect()->route('admin.category.index')->with('error', "Category not found");
         }

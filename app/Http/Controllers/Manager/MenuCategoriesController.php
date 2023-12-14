@@ -23,13 +23,20 @@ class MenuCategoriesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
-            'status' => 'nullable|boolean',
+            'status' => 'nullable',
         ]);
+
+        $restaurant = auth()->user()->restaurant;
+
+        if (!$restaurant) {
+            return redirect()->route('manager.menu.categories')->with('error', 'Invalid restaurant.');
+        }
 
         $category = new MenuCategories();
         $category->name = $validatedData['name'];
         $category->slug = Str::slug($validatedData['name']);
         $category->status = $request->has('status') ? 1 : 0;
+        $category->restaurant()->associate($restaurant);
         $category->save();
 
         return redirect()->route('manager.menu.categories')->with('success', 'Category has been created successfully');
@@ -44,7 +51,7 @@ class MenuCategoriesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
-            'status' => 'nullable|boolean',
+            'status' => 'nullable',
         ]);
 
         $category = MenuCategories::find($id);
@@ -58,6 +65,8 @@ class MenuCategoriesController extends Controller
     public function destroy($id)
     {
         $category = MenuCategories::find($id);
+
+        $category->menuitems()->delete();
         if($category)
         {
             $category->delete(); 

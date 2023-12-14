@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
 
+namespace App\Http\Controllers\Auth;
+use Illuminate\Http\Request;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\VerifiesEmails;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\VerifyEmailNotification;
 
 class VerificationController extends Controller
 {
@@ -35,17 +39,30 @@ class VerificationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['verify']);
         $this->middleware('signed')->only('verify');
         $this->middleware('throttle:6,1')->only('verify', 'resend');
     }
 
-    
-    protected function verified(\Illuminate\Http\Request $request)
+    public function verify(Request $request)
     {
-        $user = $request->user();
-        $user->markEmailAsVerified();
-        Mail::to($user->email)->send(new VerifyEmailNotification($user->name));
-        return redirect($this->redirectTo)->with('success', 'Your email has been verified, and a welcome email has been sent.');
+        $userId = $request->route('id');
+        $user = User::find($userId);
+    
+        if ($user && $user->getKey() == $userId && $user->markEmailAsVerified()) {
+            event(new Verified($user));
+        }
+    
+        return redirect('login');
     }
+    
+    protected function verified(Request $request)
+    {
+        $user = auth()->user();
+        $user->markEmailAsVerified();
+
+        return redirect('/home');
+    }
+    
+
 }

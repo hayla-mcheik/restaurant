@@ -39,25 +39,19 @@ class OrderController extends Controller
             return redirect('admin/list/orders')->with('message','Order Id not Found');
         }
     }
-
     public function updateOrderStatus(int $orderId, Request $request)
     {
-        $order = OrderModel::where('id', $orderId)->first();
-    
+        $order = OrderModel::where('id', $orderId)->first(); 
         if ($order) {
-            $validStatuses = ['in progress', 'completed', 'pending', 'cancelled', 'out-for-delivery'];
-    
-            // Validate the status against the allowed values
+            $validStatuses = ['approve', 'rejected'];
             if (in_array($request->order_status, $validStatuses)) {
                 $order->update([
                     'status_message' => array_search($request->order_status, $validStatuses),
                 ]);
-    
                 return redirect('admin/list/orders/'.$orderId)->with('success', 'Order Status Updated');
           
             } else {
-                return redirect('admin/list/orders/'.$orderId)->with('message', 'Invalid Order Status');
-                
+                return redirect('admin/list/orders/'.$orderId)->with('message', 'Invalid Order Status');               
             }
         } else {
             return redirect('admin/list/orders/'.$orderId)->with('message', 'Order Id not Found');

@@ -11,9 +11,17 @@ Dashboard
     <div class="row">
        <div class="col-xl-3 col-md-6">
           <div class="card bg-primary text-white mb-4">
-             <div class="card-body">26 New Messages!</div>
+             <div class="card-body">Total Orders:
+            
+                  @if($totalOrders)
+                      {{ $totalOrders }}
+                  @else
+                      No orders available.
+                  @endif
+       
+             </div>
              <div class="card-footer d-flex align-items-center justify-content-between">
-                <a class="small text-white stretched-link" href="messages.html">View Details</a>
+                <a class="small text-white stretched-link" href="{{ url('user/orders') }}">View Details</a>
                 <div class="small text-white"><i class="fas fa-angle-right"></i></div>
              </div>
           </div>
@@ -80,8 +88,7 @@ Dashboard
              <table class="table" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                    <tr class="text-uppercase">
-                      <th>User</th>
-                      <th>User Name</th>
+                      <th>Order Name</th>
                       <th>Restaurant</th>
                       <th>Status</th>
                       <th>Ordered on</th>
@@ -92,106 +99,49 @@ Dashboard
                 </thead>
                 <tbody>
                    <!----><!---->
+                   @forelse($orders as $order)
                    <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/1.png"></td>
-                      <td> Rhona Davidson	</td>
-                      <td>Metro Resto</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-success btn-round">delivered</button></td>
-                      <td>Sat, Jul 11, 2020 1:38 AM</td>
-                      <td>$262.49</td>
-                      <td>4</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
+                      <td> {{ $order->name }}	</td>
+                      <td> {{ $order->restaurant->name }} </td>
+                      <td>
+                        @switch($order->status_message)
+                        @case(0)
+                        <button disabled="" type="button" class="btn btn-sm btn-danger btn-round"> Pending </button>
+                            @break
+                        @case(1)
+                        <button disabled="" type="button" class="btn btn-sm btn-success btn-round">Approve </button>
+                            @break
+                        @case(2)
+                     <button disabled="" type="button" class="btn btn-sm btn-danger btn-round"> Rejected </button>
+                            @break
+                        @default
+                            Unknown Status
+                    @endswitch
+                     </td>
+                     <td>
+                        @if ($order->created_at)
+                            {{ $order->created_at->format('Y-m-d H:i:s') }}
+                        @else
+                            N/A
+                        @endif
+                    </td>
+                    
+                      <td>
+                        @foreach($order->orderItems as $item)
+                            ${{ $item->price }}<br>
+                        @endforeach
+                    </td>
+                      <td>
+                        @foreach($order->orderItems as $item)
+                        {{ $item->quantity }}<br>
+                    @endforeach</td>
+                      <td><a href="{{ route('user.orders.view', $item->id) }}" class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a> </td>  
                    </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/2.png"></td>
-                      <td> Herrod Chandler	</td>
-                      <td>Metro Resto</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-danger btn-round">cancel</button></td>
-                      <td>Fri, Jul 10, 2020 4:55 PM</td>
-                      <td>$170.77</td>
-                      <td>5</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/3.png"></td>
-                      <td> Airi Satou	</td>
-                      <td>Metro Resto</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-success btn-round">delivered</button></td>
-                      <td>Fri, Jul 10, 2020 3:48 PM</td>
-                      <td>$26.78</td>
-                      <td>2</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/4.png"></td>
-                      <td> Brielle Williamson	</td>
-                      <td>The Square restaurants</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-primary btn-round">created</button></td>
-                      <td>Fri, Jul 10, 2020 2:24 PM</td>
-                      <td>$81.23</td>
-                      <td>2</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/5.png"></td>
-                      <td> Cedric Kelly	</td>
-                      <td>Metro Resto</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-success btn-round">delivered</button></td>
-                      <td>Fri, Jul 10, 2020 11:45 AM</td>
-                      <td>$1578.00</td>
-                      <td>1</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/6.png"></td>
-                      <td> Ashton Cox	</td>
-                      <td>The Square restaurants</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-primary btn-round">created</button></td>
-                      <td>Fri, Jul 10, 2020 11:37 AM</td>
-                      <td>$238.53</td>
-                      <td>4</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/1.png"></td>
-                      <td> Garrett Winters	</td>
-                      <td>Metro Resto</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-danger btn-round">rejected</button></td>
-                      <td>Thu, Jul 9, 2020 3:54 PM</td>
-                      <td>$107.85</td>
-                      <td>2</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/2.png"></td>
-                      <td> Tiger Nixon	</td>
-                      <td>The Square restaurants</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-danger btn-round">rejected</button></td>
-                      <td>Thu, Jul 9, 2020 3:19 PM</td>
-                      <td>$83.65</td>
-                      <td>2</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/3.png"></td>
-                      <td> AMITKUMAR CHAUHAN</td>
-                      <td>Jassi de Parathe</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-primary btn-round">created</button></td>
-                      <td>Thu, Jul 9, 2020 2:28 PM</td>
-                      <td>$46.62</td>
-                      <td>2</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
-                   <tr>
-                      <td><img class="img-profile rounded-circle" src="img/user/4.png"></td>
-                      <td> Umed Ibodulloev</td>
-                      <td>Metro Resto</td>
-                      <td><button disabled="" type="button" class="btn btn-sm btn-success btn-round">delivered</button></td>
-                      <td>Thu, Jul 9, 2020 1:26 PM</td>
-                      <td>$66.71</td>
-                      <td>1</td>
-                      <td><a href="edit-order.html" class="btn btn-primary btn-sm">View</a></td>
-                   </tr>
+            @empty
+            <tr>
+               <td>no orders</td>
+            </tr>
+            @endforelse
                 </tbody>
              </table>
           </div>

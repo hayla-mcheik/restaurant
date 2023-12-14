@@ -19,6 +19,7 @@ class RestaurantprofileController extends Controller
 
     public function update(Request $request)
 {
+    
     // Validate the request
     $validatedData = $request->validate([
         'category_id' => 'required|exists:restaurant_categories,id',
@@ -26,15 +27,19 @@ class RestaurantprofileController extends Controller
         'slug' => 'required|string|max:255',
         'address' => 'required|string|max:255',
         'map' => 'required|string|max:255',
-        'phone' => 'required|string|max:255',
+        'phone' => 'required|digits_between:8,12',
         'email' => 'required|email|max:255',
         'openninghours' => 'required|string|max:255',
         'deliverytime' => 'required|string|max:255',
         'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'coverimage' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'status' => 'nullable|boolean',
+        'status' => 'nullable',
+        'popular' => 'nullable',
     ]);
-    $restaurant = RestaurantModel::firstOrCreate([
+    $user = auth()->user();
+    $restaurant = RestaurantModel::firstOrCreate(
+        ['user_id' => $user->id],
+        [
         'category_id' => $request->input('category_id'),
         'name' => $request->input('name'),
         'slug' => $request->input('slug'),
@@ -44,8 +49,10 @@ class RestaurantprofileController extends Controller
         'email' => $request->input('email'),
         'openninghours' => $request->input('openninghours'),
         'deliverytime' => $request->input('deliverytime'),
-        'status' => $request->input('status'),
+
     ]);
+    $restaurant->status = $request->has('status') ? 1 : 0;
+$restaurant->popular = $request->has('popular') ? 1 : 0;
     
     if ($request->hasFile('image')) {
         if ($restaurant->image != null) unlink($restaurant->image);
@@ -68,7 +75,7 @@ class RestaurantprofileController extends Controller
     
         $restaurant->coverimage = $imagePath;
     }
-
+    $restaurant->user_id = $user->id;
     $restaurant->update();
 
     return redirect()->route('manager.restaurant')->with('success', 'Restaurant  Updated Successfully');

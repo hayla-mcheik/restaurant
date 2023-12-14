@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('restaurant_id')->constrained('restaurant')->onDelete('cascade');
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->string('address')->nullable();
             $table->string('order_no')->nullable();
             $table->date('date')->nullable();
             $table->date('deliverydate')->nullable();
-            $table->tinyInteger('status_message')->nullable()->comment('0=pending,1=completed,2=cancelled,3=out for delivery');
+            $table->tinyInteger('status_message')->nullable()->default('0')->comment('0=pending,1=approve,2=rejected');
             $table->string('payment_mode')->nullable();
             $table->string('payment_id')->nullable();
             $table->timestamps();

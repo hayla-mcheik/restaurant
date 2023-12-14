@@ -9,5 +9,16 @@ class MenuCategories extends Model
 {
     use HasFactory;
     protected $table='menu_categories';
-    protected $fillable=['name','slug','status'];
+    protected $fillable=['restaurant_id','name','slug','status'];
+
+public function menuitems()
+{
+    return $this->hasMany(MenuItems::class,'menu_category_id');
+}
+
+public function restaurant()
+{
+    return $this->belongsTo(RestaurantModel::class, 'restaurant_id');
+}
+
 }

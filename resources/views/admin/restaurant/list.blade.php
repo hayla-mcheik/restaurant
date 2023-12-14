@@ -20,6 +20,21 @@ Restaurant list
 <div class="card-body">
 
  <table class="table table-sm table-bordered table-striped">
+
+    <form action="" method="get" class="float-end">
+        @csrf
+        <div class="row justify-content-end">
+
+<div class="mb-3 col-md-3">
+<input type="text" name="name"  class="form-control" value="{{ Request::get('name') }}" required/>
+@error('name') <small>{{ $message}}</small> @enderror
+</div>
+<div class="col-md-3">
+    <button type="btn" class="btn btn-primary">Search by Name</button>
+</div>
+</div>
+</form>
+
     <thead>
         
         <tr>

@@ -14,55 +14,28 @@ class RestaurantController extends Controller
      */
     public function index()
     {
-        $restaurant = RestaurantModel::all();
+        $restaurant =RestaurantModel::orderBy('id', 'desc');
+        
+        if (!empty(request()->get('name'))) {
+            $restaurant = $restaurant->where('name', 'like', '%' . request()->get('name') . '%');
+        }
+        $restaurant = $restaurant->get();
+
         return view('admin.restaurant.list',compact('restaurant'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-
-
-    /**
-     * Store a newly created resource in storage.
-     */
-//     public function store(Request $request)
-//     {
-//         $restaurant = new RestaurantModel();
-//         $restaurant->category_id = $request->input('category_id');  
-//         $restaurant->name = $request->input('name');
-//         $restaurant->slug = Str::slug($request->input('slug'));
-//         $restaurant->address = $request->input('address');
-//         $restaurant->map = $request->input('map');
-//         $restaurant->phone = $request->input('phone');
-//         $restaurant->email = $request->input('email');
-//         $restaurant->openninghours = $request->input('openninghours');
-//         $restaurant->deliverytime = $request->input('deliverytime');
-//         $restaurant->status = $request->has('status') ? '1' : '0';
-//         $restaurant->save();
-// return redirect('admin.restaurant.list')->with('success','Restaurant has been created successfully')
-//     }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
     public function edit($id)
-    {
-        $restaurant = RestaurantModel::find($id);
-        return view('admin.restaurant.list',compact('restaurant'));
-    }
+{
+    $restaurant = RestaurantModel::find($id);
+    return view('admin.restaurant.edit', compact('restaurant')); // Use the correct view name
+}
+
+public function update(Request $request, $id)
+{
+    $restaurant = RestaurantModel::find($id);
+    $restaurant->status = $request->input('status') === 'active' ? '0' : '1';
+    $restaurant->save();
+    return redirect()->route('admin.restaurant.index')->with('success', 'Restaurant status has been updated successfully');
+}
 
 
-    public function update(Request $request, $id)
-    {
-        $restaurant = RestaurantModel::find($id);
-        $restaurant->status = $request->has('status') ? '1' : '0';
-        $restaurant->save();
-        return redirect('admin.restaurant.list')->with('success','Restaurant status has been updated successfully'); 
-    }
 }

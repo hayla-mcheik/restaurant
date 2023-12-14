@@ -47,8 +47,7 @@ Categories list
         </td>
 
         <td>
-            <a href="{{ route('admin.category.edit', $value->id) }}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>
-            <a href="{{ route('admin.category.delete', $value->id) }}" onclick="return confirm('Are your sure you want to delete this data?')" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i></a>       
+            <a href="{{ route('admin.category.edit', $value->id) }}" class="btn btn-sm btn-success"><i class="fas fa-edit"></i></a>      
 </td>
 </tr>
     @empty

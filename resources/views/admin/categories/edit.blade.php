@@ -45,6 +45,19 @@
                                 @error('slug') <small>{{ $message}}</small> @enderror
                             </div>   
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="image">Image*</label>
+                                <input type="file" name="image" class="form-control" accept="image/*">
+                                @if ($category->image)
+                                    <img src="{{ asset($category->image) }}" alt="{{ $category->name }}"
+                                        class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
+                                @endif
+                                @error('image') <small>{{ $message }}</small> @enderror
+                            </div>
+                        </div>
+
                             <div class="mb-3">
                                 <label>Status*</label>
                                 <input  type="checkbox"  name="status"  {{ $category->status ? 'checked' : '' }} />

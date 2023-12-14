@@ -41,102 +41,30 @@
              </div>
              <h6 class="mt-4 text-shadow font-weight-normal">E.g. Beverages, Pizzas, Chinese, Bakery, Indian...</h6>
              <div class="owl-carousel owl-carousel-category owl-theme">
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/1.png" alt="">
-                         <h6>American</h6>
-                         <p>156</p>
-                      </a>
+               @foreach ($categories as $category)
+                   <div class="item">
+                       <div class="osahan-category-item">
+                           <a href="#">
+                               <!-- Your category image -->
+                               <img class="img-fluid" src="{{ asset($category->image) }}" alt="">
+                               <h6>{{ $category->name }}</h6>
+                               <p>{{ $category->restaurant_count }} restaurants</p>
+                           </a>
+                       </div>
                    </div>
-                </div>
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/2.png" alt="">
-                         <h6>Pizza</h6>
-                         <p>120</p>
-                      </a>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/3.png" alt="">
-                         <h6>Healthy</h6>
-                         <p>130</p>
-                      </a>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/4.png" alt="">
-                         <h6>Vegetarian</h6>
-                         <p>120</p>
-                      </a>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/5.png" alt="">
-                         <h6>Chinese</h6>
-                         <p>111</p>
-                      </a>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/6.png" alt="">
-                         <h6>Hamburgers</h6>
-                         <p>958</p>
-                      </a>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/7.png" alt="">
-                         <h6>Dessert</h6>
-                         <p>56</p>
-                      </a>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/8.png" alt="">
-                         <h6>Chicken</h6>
-                         <p>40</p>
-                      </a>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="osahan-category-item">
-                      <a href="#">
-                         <img class="img-fluid" src="img/list/9.png" alt="">
-                         <h6>Indian</h6>
-                         <p>156</p>
-                      </a>
-                   </div>
-                </div>
-             </div>
+               @endforeach
+           </div>
           </div>
           <div class="col-md-4">
              <div class="osahan-slider pl-4 pt-3">
                 <div class="owl-carousel homepage-ad owl-theme">
+                  @foreach($restaurants as $restaurant)
                    <div class="item">
-                      <a href="listing.html"><img class="img-fluid rounded" src="img/slider.png"></a>
+                      <a href="listing.html"><img class="img-fluid rounded" src="{{ asset($restaurant->image) }}"></a>
                    </div>
-                   <div class="item">
-                      <a href="listing.html"><img class="img-fluid rounded" src="img/slider1.png"></a>
-                   </div>
-                   <div class="item">
-                      <a href="listing.html"><img class="img-fluid rounded" src="img/slider.png"></a>
-                   </div>
+                   @endforeach
                 </div>
+                
              </div>
           </div>
        </div>
@@ -145,39 +73,29 @@
  <section class="section pt-5 pb-5 bg-white homepage-add-section">
     <div class="container">
        <div class="row">
+         @foreach($restaurantssection as $restaurant)
           <div class="col-md-3 col-6">
              <div class="products-box">
-                <a href="listing.html"><img alt="" src="img/pro1.jpg" class="img-fluid rounded"></a>
+                <a href="listing.html"><img alt="" src="{{ asset($restaurant->image) }}" class="img-fluid rounded"></a>
              </div>
           </div>
-          <div class="col-md-3 col-6">
-             <div class="products-box">
-                <a href="listing.html"><img alt="" src="img/pro2.jpg" class="img-fluid rounded"></a>
-             </div>
-          </div>
-          <div class="col-md-3 col-6">
-             <div class="products-box">
-                <a href="listing.html"><img alt="" src="img/pro3.jpg" class="img-fluid rounded"></a>
-             </div>
-          </div>
-          <div class="col-md-3 col-6">
-             <div class="products-box">
-                <a href="listing.html"><img alt="" src="img/pro4.jpg" class="img-fluid rounded"></a>
-             </div>
-          </div>
+          @endforeach
+
        </div>
     </div>
  </section>
  <section class="section pt-5 pb-5 products-section">
     <div class="container">
        <div class="section-header text-center">
-          <h2>Popular Brands</h2>
+          <h2>Popular Restaurants</h2>
           <p>Top restaurants, cafes, pubs, and bars in Ludhiana, based on trends</p>
           <span class="line"></span>
        </div>
        <div class="row">
           <div class="col-md-12">
              <div class="owl-carousel owl-carousel-four owl-theme">
+
+               @foreach($popularrestaurant as $popularrestaurant)
                 <div class="item">
                    <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
                       <div class="list-card-image">
@@ -185,115 +103,19 @@
                          <div class="favourite-heart text-danger position-absolute"><a href="detail.html"><i class="icofont-heart"></i></a></div>
                          <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
                          <a href="detail.html">
-                         <img src="img/list/1.png" class="img-fluid item-img">
+                         <img src="{{ asset($popularrestaurant->image) }}" class="img-fluid item-img">
                          </a>
                       </div>
                       <div class="p-3 position-relative">
                          <div class="list-card-body">
-                            <h6 class="mb-1"><a href="detail.html" class="text-black">World Famous</a></h6>
-                            <p class="text-gray mb-3">North Indian • American • Pure veg</p>
-                            <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> 20–25 min</span> <span class="float-right text-black-50"> $250 FOR TWO</span></p>
+                            <h6 class="mb-1"><a href="detail.html" class="text-black">{{ $popularrestaurant->name }}</a></h6>
+                            <p class="text-gray mb-3">{{ $popularrestaurant->address }}</p>
                          </div>
-                         <div class="list-card-badge">
-                            <span class="badge badge-success">OFFER</span> <small>65% off | Use Coupon OSAHAN50</small>
-                         </div>
+       
                       </div>
                    </div>
                 </div>
-                <div class="item">
-                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                      <div class="list-card-image">
-                         <div class="star position-absolute"><span class="badge badge-warning"><i class="icofont-star"></i> 3.1 (300+)</span></div>
-                         <div class="favourite-heart text-danger position-absolute"><a href="detail.html"><i class="icofont-heart"></i></a></div>
-                         <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
-                         <a href="detail.html">
-                         <img src="img/list/3.png" class="img-fluid item-img">
-                         </a>
-                      </div>
-                      <div class="p-3 position-relative">
-                         <div class="list-card-body">
-                            <h6 class="mb-1"><a href="detail.html" class="text-black">Bite Me Sandwiches</a></h6>
-                            <p class="text-gray mb-3">North Indian • Indian • Pure veg</p>
-                            <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> 15–25 min</span> <span class="float-right text-black-50"> $100 FOR TWO</span></p>
-                         </div>
-                         <div class="list-card-badge">
-                            <span class="badge badge-danger">OFFER</span> <small>65% off | Use Coupon OSAHAN50</small>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                      <div class="list-card-image">
-                         <div class="star position-absolute"><span class="badge badge-success"><i class="icofont-star"></i> 3.1 (300+)</span></div>
-                         <div class="favourite-heart text-danger position-absolute"><a href="detail.html"><i class="icofont-heart"></i></a></div>
-                         <div class="member-plan position-absolute"><span class="badge badge-danger">Promoted</span></div>
-                         <a href="detail.html">
-                         <img src="img/list/6.png" class="img-fluid item-img">
-                         </a>
-                      </div>
-                      <div class="p-3 position-relative">
-                         <div class="list-card-body">
-                            <h6 class="mb-1"><a href="detail.html" class="text-black">The osahan Restaurant
-                               </a>
-                            </h6>
-                            <p class="text-gray mb-3">North • Hamburgers • Pure veg</p>
-                            <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> 15–25 min</span> <span class="float-right text-black-50"> $500 FOR TWO</span></p>
-                         </div>
-                         <div class="list-card-badge">
-                            <span class="badge badge-danger">OFFER</span> <small>65% off | Use Coupon OSAHAN50</small>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                      <div class="list-card-image">
-                         <div class="star position-absolute"><span class="badge badge-success"><i class="icofont-star"></i> 3.1 (300+)</span></div>
-                         <div class="favourite-heart text-danger position-absolute"><a href="detail.html"><i class="icofont-heart"></i></a></div>
-                         <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
-                         <a href="detail.html">
-                         <img src="img/list/8.png" class="img-fluid item-img">
-                         </a>
-                      </div>
-                      <div class="p-3 position-relative">
-                         <div class="list-card-body">
-                            <h6 class="mb-1"><a href="detail.html" class="text-black">Polo Lounge
-                               </a>
-                            </h6>
-                            <p class="text-gray mb-3">North Indian • Indian • Pure veg</p>
-                            <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> 15–25 min</span> <span class="float-right text-black-50"> $250 FOR TWO</span></p>
-                         </div>
-                         <div class="list-card-badge">
-                            <span class="badge badge-danger">OFFER</span> <small>65% off | Use Coupon OSAHAN50</small>
-                         </div>
-                      </div>
-                   </div>
-                </div>
-                <div class="item">
-                   <div class="list-card bg-white h-100 rounded overflow-hidden position-relative shadow-sm">
-                      <div class="list-card-image">
-                         <div class="star position-absolute"><span class="badge badge-success"><i class="icofont-star"></i> 3.1 (300+)</span></div>
-                         <div class="favourite-heart text-danger position-absolute"><a href="detail.html"><i class="icofont-heart"></i></a></div>
-                         <div class="member-plan position-absolute"><span class="badge badge-dark">Promoted</span></div>
-                         <a href="detail.html">
-                         <img src="img/list/9.png" class="img-fluid item-img">
-                         </a>
-                      </div>
-                      <div class="p-3 position-relative">
-                         <div class="list-card-body">
-                            <h6 class="mb-1"><a href="detail.html" class="text-black">Jack Fry's
-                               </a>
-                            </h6>
-                            <p class="text-gray mb-3">North Indian • Indian • Pure veg</p>
-                            <p class="text-gray mb-3 time"><span class="bg-light text-dark rounded-sm pl-2 pb-1 pt-1 pr-2"><i class="icofont-wall-clock"></i> 15–25 min</span> <span class="float-right text-black-50"> $250 FOR TWO</span></p>
-                         </div>
-                         <div class="list-card-badge">
-                            <span class="badge badge-danger">OFFER</span> <small>65% off | Use Coupon OSAHAN50</small>
-                         </div>
-                      </div>
-                   </div>
-                </div>
+                @endforeach
              </div>
           </div>
        </div>

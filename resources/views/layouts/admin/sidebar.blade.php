@@ -21,7 +21,7 @@
             </a>
              <a class="nav-link" href="{{ url('admin/category/restaurant/list') }}">
                <div class="sb-nav-link-icon"><i class="feather-grid"></i></div>
-              category
+             Restaurant categories
             </a>
              <a class="nav-link" href="{{ url('admin/list/restaurant') }}">
                 <div class="sb-nav-link-icon"><i class="feather-clipboard"></i></div>
@@ -39,7 +39,7 @@
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
          Dashboard
       </a> 
-      <a class="nav-link">
+      <a class="nav-link" href="{{ url('manager/orders') }}">
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
      Orders Management
       </a> 
@@ -49,17 +49,21 @@
          Restaurant Management
      </a>
      
-
+     @auth
+     @if(auth()->user()->restaurant)
+     
       <a class="nav-link" href={{ route('manager.menu.categories') }}>
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
 Menu Categories
       </a> 
-
-      <a class="nav-link">
+      <a class="nav-link" href="{{route('manager.menu.items') }}">
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
 Menu Items
       </a> 
-             <a class="nav-link" href="my-profile.html">
+      @endif
+      @endauth
+      
+             <a class="nav-link" href="{{ route('manager.profile') }}">
                 <div class="sb-nav-link-icon"><i class="feather-user"></i></div>
                 My Profile
              </a>
@@ -105,11 +109,16 @@ Menu Items
                Dashboard
             </a> 
 
-            <a class="nav-link" href="{{ url('user/dashboard') }}">
+            <a class="nav-link" href="{{ url('user/orders') }}">
+               <div class="sb-nav-link-icon"><i class="feather-shopping-bag"></i></div>
+               My Orders
+            </a>
+
+            <a class="nav-link" href="{{ url('user/addresses') }}">
                <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
           Addresses
             </a> 
-            <a class="nav-link" href="my-profile.html">
+            <a class="nav-link" href="{{ url('user/profile') }}">
                <div class="sb-nav-link-icon"><i class="feather-user"></i></div>
                My Profile
             </a>

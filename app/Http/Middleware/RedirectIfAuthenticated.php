@@ -24,14 +24,9 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 $user = Auth::user();
                 if ($user->role_as == '3') {
-                    if ($user->status == 'active') {
+
                         return redirect('user/dashboard')->with('message', 'Welcome to Dashboard');
-                    } else {
-                        auth()->logout();
-                        
-                    Mail::to($user->email)->send(new ApproveEmailNotification($user->name));
-                        return back()->with('status', 'Your account is not yet active. Please wait for admin approval.');
-                    }
+          
                 } 
                 else if ($user->role_as == '2') {
                     if ($user->status == 'active') {
@@ -44,18 +39,10 @@ class RedirectIfAuthenticated
                     }
                 } 
                 else if ($user->role_as == '1') {
-                    if ($user->status == 'active') {
-                   \Log::info('Role as : status' );
             
                         return redirect('admin/dashboard')->with('message', 'Welcome to Dashboard');
-                    } else {
-                        auth()->logout();
-                        
-                    Mail::to($user->email)->send(new ApproveEmailNotification($user->name));
-                        return back()->with('status', 'Your account is not yet active. Please wait for admin approval.');
-                    }
+                    
                 } else {
-                    // Handle other roles or redirect to a default location
                     return redirect(RouteServiceProvider::HOME);
                 }
             }

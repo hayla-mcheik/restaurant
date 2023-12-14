@@ -32,7 +32,10 @@
       <link href="{{ asset('admin/assets/css/styles.css') }}" rel="stylesheet" />
       <!-- Datatables css -->
       <link href="{{ asset('admin/assets/vendor/dataTables/dataTables/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
-   
+         <!-- Dropzone -->
+         <link href="{{ asset('admin/assets/vendor/dropzone/dist/dropzone.css') }}" rel="stylesheet">
+         <!-- Date Picker -->
+         <link href="http://www.ansonika.com/foogra/admin_section/css/date_picker.css" rel="stylesheet">
 </head>
 <body class="sb-nav-fixed">
     @include('layouts.admin.header')
@@ -72,6 +75,9 @@
 <script src="{{ asset('admin/assets/demo/datatables-demo.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+         <!-- Dropzone-->
+         <script src="{{ asset('admin/assets/vendor/dropzone/dist/min/dropzone.min.js') }}"></script>
+         <script src="http://www.ansonika.com/foogra/admin_section/vendor/bootstrap-datepicker.js"></script>
 
 </body>
 </html>
