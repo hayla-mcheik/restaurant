@@ -60,6 +60,19 @@ Menu Categories
          <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
 Menu Items
       </a> 
+
+      <a class="nav-link" href="{{route('manager.gallery') }}">
+         <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
+Gallery
+      </a> 
+
+      <a class="nav-link" href="{{route('manager.offers.index') }}">
+         <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
+Offers
+      </a> 
+
+     
+
       @endif
       @endauth
       
@@ -113,15 +126,21 @@ Menu Items
                <div class="sb-nav-link-icon"><i class="feather-shopping-bag"></i></div>
                My Orders
             </a>
+            
 
             <a class="nav-link" href="{{ url('user/addresses') }}">
                <div class="sb-nav-link-icon"><i class="feather-home"></i></div>
           Addresses
             </a> 
+            <a class="nav-link" href="{{ url('user/wishlist') }}">
+               <div class="sb-nav-link-icon"><i class="fa fa-heart"></i></div>
+               My Favorite 
+            </a>
             <a class="nav-link" href="{{ url('user/profile') }}">
                <div class="sb-nav-link-icon"><i class="feather-user"></i></div>
                My Profile
             </a>
+            
             @endif
             @endif
          @endif

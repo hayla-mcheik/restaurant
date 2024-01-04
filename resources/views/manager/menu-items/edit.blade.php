@@ -1,18 +1,18 @@
 @extends('layouts.admin.master')
 
 @section('title')
-    Add Menu Items
+    Edit Menu Items
 @endsection
 
 @section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <h3>Add Menu Items</h3>
+                <h3>Edit Menu Items</h3>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="{{ url('manager/dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="{{ url('manager/menu/items') }}">Menu Items list</a></li>
-                    <li class="breadcrumb-item active">Create Menu Items</li>
+                    <li class="breadcrumb-item active">Edit Menu Items</li>
                 </ol>
                 <div class="card">
                     <div class="card-body">
@@ -63,6 +63,15 @@
 
                                 <div class="col-md-6">
                                     <div class="mb-3">
+                                        <label>Quantity*</label>
+                                        <input type="number" name="quantity" value="{{ $menuitems->quantity }}"
+                                            class="form-control" />
+                                        @error('quantity') <small>{{ $message}}</small> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="mb-3">
                                         <label>Price*</label>
                                         <input type="text" name="price" value="{{ $menuitems->price }}"
                                             class="form-control" />
@@ -79,6 +88,8 @@
                                             <img src="{{ asset($menuitems->image) }}" alt="{{ $menuitems->name }}"
                                                 class="img-thumbnail" style="max-width: 200px; max-height: 200px;">
                                         @endif
+
+                
                                         @error('image') <small>{{ $message }}</small> @enderror
                                     </div>
                                 </div>

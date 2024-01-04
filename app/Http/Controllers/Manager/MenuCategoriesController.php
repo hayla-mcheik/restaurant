@@ -11,7 +11,8 @@ class MenuCategoriesController extends Controller
 {
     public function index()
     {
-        $categories = MenuCategories::all();
+        $user = auth()->user();
+        $categories = $user->restaurant->menuCategories;
         return view('manager.menu-category.index',compact('categories'));
     }
     public function create()
@@ -23,6 +24,7 @@ class MenuCategoriesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'nullable',
         ]);
 
@@ -36,6 +38,18 @@ class MenuCategoriesController extends Controller
         $category->name = $validatedData['name'];
         $category->slug = Str::slug($validatedData['name']);
         $category->status = $request->has('status') ? 1 : 0;
+
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $fileName = time() . rand(1000, 50000) . '.' . $image->getClientOriginalExtension();
+            $image->move('upload/restaurant/menucategories', $fileName);
+        
+            $imagePath = 'upload/restaurant/menucategories/' . $fileName;
+        
+            $category->image = $imagePath;
+        }
+
         $category->restaurant()->associate($restaurant);
         $category->save();
 
@@ -51,6 +65,7 @@ class MenuCategoriesController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'slug' => 'required|string|max:255',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'status' => 'nullable',
         ]);
 
@@ -58,6 +73,17 @@ class MenuCategoriesController extends Controller
         $category->name = $validatedData['name'];
         $category->slug = Str::slug($validatedData['name']);
         $category->status = $request->has('status') ? 1 : 0;
+
+        if ($request->hasFile('image')) {
+            if ($category->image != null) unlink($category->image);
+            $image = $request->file('image');
+            $fileName = time() . rand(1000, 50000) . '.' . $image->getClientOriginalExtension();
+            $image->move('upload/restaurant/menucategories', $fileName);
+        
+            $imagePath = 'upload/restaurant/menucategories/' . $fileName;
+        
+            $category->image = $imagePath;
+        }
         $category->update();
         return redirect()->route('manager.menu.categories')->with('success', 'Category has been updated successfully');
     }

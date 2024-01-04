@@ -18,10 +18,11 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->string('address')->nullable();
-            $table->string('map')->nullable();
+            $table->string('map')->nullazble();
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('openninghours')->nullable();
+            $table->string('closinghours')->nullable();
             $table->string('deliverytime')->nullable();
             $table->tinyInteger('status')->nullable()->default(0);
             $table->tinyInteger('popular')->nullable()->default(0);

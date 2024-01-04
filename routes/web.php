@@ -9,16 +9,26 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProfileAdminController;
 use App\Http\Controllers\Manager\RestaurantprofileController;
-use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Manager\MenuCategoriesController;
 use App\Http\Controllers\Manager\MenuItemsController;
 use App\Http\Controllers\Manager\ProfileController;
 use App\Http\Controllers\Manager\OrderManagementController;
+use App\Http\Controllers\Manager\GalleryController;
+use App\Http\Controllers\Manager\OfferController;
 use App\Http\Controllers\user\OrderUserController;
 use App\Http\Controllers\user\ProfileUserController;
 use App\Http\Controllers\user\AddressesController;
 use App\Http\Controllers\Auth\VerificationController;
+use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\Frontend\WishlistController;
+use App\Http\Controllers\StripeController;
+use App\Http\Controllers\SubscriptionController;
+
+use App\Livewire\Frontend\Order\Index;
+
+
 /*
+
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -38,11 +48,16 @@ Route::get('/', function () {
 Route::get('/', [IndexController::class, 'index'])->name('home.index');
 Route::controller(App\Http\Controllers\Frontend\ListingRestaurantController::class)->group(function () {
     Route::get('/listing','index');
+    Route::get('/listing/restaurant/details/{restaurant_id}','restaurantdetails')->name('listing.restaurant.details.view');
 });
 
+Route::controller(App\Http\Controllers\Frontend\CheckoutController::class)->group(function () {
+    Route::get('/checkout','index');
+});
 
-
-
+Route::controller(App\Http\Controllers\Frontend\OffersController::class)->group(function () {
+    Route::get('/offers','index');
+});
 
 
 Route::get('email/verify', [VerificationController::class,'show'])->name('verification.notice');
@@ -106,6 +121,23 @@ Route::group(['middleware' => ['manager','auth'],'prefix'=>'manager'],function (
     Route::get('/profile', [ProfileController::class, 'profile'])->name('manager.profile');
     Route::put('/profile', [ProfileController::class, 'updateprofile'])->name('manager.profile.update');
 
+    Route::get('gallery', [GalleryController::class,'index'])->name('manager.gallery');
+    Route::get('gallery/create', [GalleryController::class,'create'])->name('manager.gallery.create');
+    Route::post('gallery/store', [GalleryController::class,'store'])->name('manager.gallery.store');
+    Route::get('gallery/edit/{id}', [GalleryController::class,'edit'])->name('manager.gallery.edit');
+    Route::put('gallery/update/{id}', [GalleryController::class,'update'])->name('manager.gallery.update');
+    Route::get('gallery/delete/{id}', [GalleryController::class,'delete'])->name('manager.gallery.delete');
+
+
+    Route::get('offers', [OfferController::class,'index'])->name('manager.offers.index');
+    Route::get('offers/create', [OfferController::class,'create'])->name('manager.offers.create');
+    Route::post('offers/store', [OfferController::class,'store'])->name('manager.offers.store');
+    Route::get('offers/edit/{offer}', [OfferController::class,'edit'])->name('manager.offers.edit');
+    Route::put('offers/{offer}', [OfferController::class,'update'])->name('manager.offers.update');
+    Route::get('offers/{offer}', [OfferController::class,'destroy'])->name('manager.offers.destroy');
+    Route::post('offers/get-menu-items/{categoryId}', [OfferController::class, 'getMenuItems'])->name('manager.offers.getMenuItems');
+
+
 });
 
 Route::group(['middleware' => ['user', 'auth'],'prefix'=>'user','auth'],function () {
@@ -117,7 +149,22 @@ Route::group(['middleware' => ['user', 'auth'],'prefix'=>'user','auth'],function
     Route::put('/profile', [ProfileUserController::class, 'updateprofile'])->name('user.profile.update');
 
     Route::get('/addresses', [AddressesController::class, 'list'])->name('user.addresses.list');
+    Route::post('addresses/save', [AddressesController::class, 'saveAddress'])->name('user.address.save');
+    Route::get('addresses/edit/{id}', [AddressesController::class, 'edit'])->name('user.address.edit');
+    Route::put('addresses/update/{id}', [AddressesController::class, 'update'])->name('user.address.update');
+    Route::get('addresses/delete/{id}', [AddressesController::class, 'delete'])->name('user.address.delete');
+    Route::post('/address/{addressId}', 'App\Livewire\Frontend\Order\Index@setAddress');
+
+    Route::get('/wishlist',[WishlistController::class,'index'])->name('wishlist.index');
+    Route::get('/wishlist/{id}',[WishlistController::class,'remove'])->name('frontend.wishlist.remove');
 });
 
+Route::get('thanks', [IndexController::class, 'thanks'])->name('thanks');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+
+//stripe payment
+Route::post('/stripe', [Index::class, 'stripePayment'])->name('stripe.post');
+
+//subscribe
+Route::post('/subscribe',[SubscriptionController::class,'subscribe'])->name('subscribe');

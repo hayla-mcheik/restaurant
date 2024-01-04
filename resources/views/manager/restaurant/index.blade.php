@@ -33,13 +33,12 @@ Restaurant Profile
                     <select name="category_id" class="form-control">
                         <option value="" selected disabled>Select a Category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ optional($restaurant)->category_id == $category->id ? 'selected' : '' }}>
+                            <option value="{{ $category->id }}" {{ $restaurant->category_id == $category->id ? 'selected' : '' }}>
                                 {{ $category->name }}
                             </option>
                         @endforeach
                     </select>
-                </div>
-                
+                </div>              
             </div>
             
          <div class="col-md-6">
@@ -130,12 +129,12 @@ Restaurant Profile
 
                             <div class="mb-3">
                                 <label>Status*</label>
-                                <input type="checkbox" name="status" {{ $restaurant->status ? 'checked' : '' }} />
+                                <input type="checkbox" name="status" {{ $restaurant->status ?? false ? 'checked' : '' }} />
                             </div>
                             
                             <div class="mb-3">
                                 <label>Popular*</label>
-                                <input type="checkbox" name="popular" {{ $restaurant->popular ? 'checked' : '' }} />
+                                <input type="checkbox" name="popular" {{ $restaurant->popular ?? false ? 'checked' : '' }} />
                             </div>
                             
     

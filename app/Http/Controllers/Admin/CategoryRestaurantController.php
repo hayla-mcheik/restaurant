@@ -36,13 +36,10 @@ class CategoryRestaurantController extends Controller
         $category->status = $request->has('status') ? '1' : '0';
 
         if ($request->hasFile('image')) {
-            if ($category->image != null) unlink($category->image);
             $image = $request->file('image');
             $fileName = time() . rand(1000, 50000) . '.' . $image->getClientOriginalExtension();
-            $image->move('upload/restaurantcategory', $fileName);
-        
-            $imagePath = 'upload/restaurant/' . $fileName;
-        
+            $image->move('upload/restaurantcategory', $fileName);        
+            $imagePath = 'upload/restaurantcategory/' . $fileName;      
             $category->image = $imagePath;
         }
 
@@ -80,7 +77,7 @@ class CategoryRestaurantController extends Controller
             $fileName = time() . rand(1000, 50000) . '.' . $image->getClientOriginalExtension();
             $image->move('upload/restaurantcategory', $fileName);
         
-            $imagePath = 'upload/restaurant/' . $fileName;
+            $imagePath = 'upload/restaurantcategory/' . $fileName;
         
             $category->image = $imagePath;
         }

@@ -29,7 +29,17 @@ class User extends Authenticatable implements MustVerifyEmail
         'role_as',
         'status',
     ];
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 
+
+// User.php
+public function wishlist()
+{
+    return $this->hasMany(WishlistModel::class);
+}
 
 public function orders()
 {
@@ -40,6 +50,12 @@ public function restaurant()
 {
     return $this->hasOne(RestaurantModel::class, 'user_id'); 
 }
+
+public function addresses()
+{
+    return $this->hasMany(UserAddress::class);
+}
+
     /**
      * The attributes that should be hidden for serialization.
      *

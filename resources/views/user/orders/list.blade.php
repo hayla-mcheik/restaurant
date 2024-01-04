@@ -28,10 +28,17 @@ My Orders
 </tr>
 </thead>
 <tbody>
+    @if($orders)
     @forelse($orders as $value)
     <tr>
         <td>{{ $value->id }}</td>
-        <td>{{ $value->name }}</td>
+        <td>
+            @forelse($value->orderItems as $orderItem)
+                {{ $orderItem->menu->name }}
+            @empty
+                No items in this order
+            @endforelse
+        </td>
         <td>
             @switch($value->status_message)
             @case(0)
@@ -44,7 +51,7 @@ My Orders
          <button disabled="" type="button" class="btn btn-sm btn-danger btn-round"> Rejected </button>
                 @break
             @default
-                Unknown Status
+         Pending
         @endswitch
         </td>
 
@@ -57,7 +64,9 @@ My Orders
         <td colspan="5">No Orders Available</td>
 </tr>
     @endforelse
-
+@else
+<p>No Orders Available </p>
+@endif
 </tbody>
 </table> 
 <div class="pt-2 float-end">

@@ -13,7 +13,7 @@ use App\Mail\VerifyEmailNotification;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Auth\Events\Registered; 
 use App\Rules\EmailDomain;
-
+use Illuminate\Validation\Rule;
 class RegisterController extends Controller
 {
     use RegistersUsers;
@@ -22,7 +22,6 @@ class RegisterController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest');
     }
 
     protected function validator(array $data)
@@ -31,6 +30,11 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'string', 'min:8'],
+            'phone' => ['required', 'string', 'min:8'],
+            'role_as' => [
+                'required',
+                Rule::in(['user', 'manager']),
+            ],
         ]);
     }
 
@@ -38,11 +42,12 @@ class RegisterController extends Controller
     {
         $roleAs = $data['role_as'] ?? 'admin';
         $status = $roleAs == 1 ? 'active' : 'pending';
-    
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'phone' => $data['phone'] ?? null,
+            'info' => $data['info'] ?? null,
             'status' => 'pending',
             'role_as' => $this->getRoleAsValue($roleAs),
     

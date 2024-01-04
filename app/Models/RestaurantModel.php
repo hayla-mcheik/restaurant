@@ -9,19 +9,21 @@ class RestaurantModel extends Model
 {
     use HasFactory;
     protected $table='restaurant';
-    protected $fillable=['category_id','user_id','image','coverimage','name','slug','address','map','phone','email','openninghours','deliverytime','status','popular'];
+    protected $fillable=['category_id','user_id','image','coverimage','name','slug','address','map','phone','email','openninghours','closinghours','deliverytime','status','popular'];
 
 public function category()
 {
     return $this->belongsTo(RestaurantCategory::class,'category_id');
 }
-
+public function gallery()
+{
+    return $this->hasMany(GalleryModel::class,'restaurant_id');
+}
 
 public function order()
 {
     return $this->hasMany(OrderModel::class,'restaurant_id');
 }
-
 
 public function user()
 {
@@ -32,6 +34,5 @@ public function menuCategories()
 {
     return $this->hasMany(MenuCategories::class, 'restaurant_id');
 }
-
 
 }

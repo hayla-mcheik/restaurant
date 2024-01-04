@@ -31,7 +31,13 @@ Orders list
     @forelse($order as $value)
     <tr>
         <td>{{ $value->id }}</td>
-        <td>{{ $value->name }}</td>
+        <td>
+            @forelse($value->orderItems as $orderItem)
+                {{ $orderItem->menu->name }}
+            @empty
+                No items in this order
+            @endforelse
+        </td>
         <td>
             @switch($value->status_message)
             @case(0)

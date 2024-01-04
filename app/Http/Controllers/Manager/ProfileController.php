@@ -25,11 +25,15 @@ public function updateprofile(Request $request)
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users,email,' . $owner->id,
         'password' => 'nullable|string|min:8',
+        'phone' => 'nullable|numeric|digits:8',
+        'info' => 'required|string|min:8',
     ]);
 
     // Update user data
     $owner->name = $request->input('name');
     $owner->email = $request->input('email');
+    $owner->phone = $request->input('phone');
+    $owner->info = $request->input('info');
 
     if ($request->filled('password')) {
         $owner->password = bcrypt($request->input('password'));

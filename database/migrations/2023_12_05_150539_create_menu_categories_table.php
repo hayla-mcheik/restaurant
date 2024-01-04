@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('restaurant_id')->constrained('restaurant');
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
+            $table->string('image')->nullable();
             $table->unsignedInteger('status')->nullable()->default(0);
             $table->timestamps();
         });

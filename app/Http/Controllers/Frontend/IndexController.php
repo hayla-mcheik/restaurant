@@ -11,11 +11,18 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $categories = RestaurantCategory::where('status','0')->get();
-       $restaurants = RestaurantModel::all();
-       $restaurantssection = RestaurantModel::take(4)->get();
+       $categories = RestaurantCategory::where('status','0')->get();
+       $restaurants = RestaurantModel::where('status','0')->get();
+       $restaurantssection = RestaurantModel::where('status','0')->take(4)->get();
+       $popularrestaurants = RestaurantModel::withCount('order')
+       ->orderByDesc('order_count')
+       ->get();
+       
+        return view('frontend.home.index', compact('categories','restaurants','restaurantssection','popularrestaurants'));
+    }
 
-    $popularrestaurant = RestaurantModel::where('popular','1')->get();
-        return view('frontend.home.index', compact('categories','restaurants','restaurantssection','popularrestaurant'));
+    public function thanks()
+    {
+        return view('frontend.thanks');
     }
 }

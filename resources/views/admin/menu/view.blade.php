@@ -21,18 +21,16 @@ Orders list
               <div class="card-body">
                  <div class="card mb-4 order-list">
                     <div class="gold-members p-4">
-                       <a href="#">
-                       </a>
                        <div class="media">
-                          <a href="#">
+                          <a>
                           <img class="mr-4" src="{{ asset($menu->image) }}" alt="{{ $menu->name }}">
                           </a>
                           <div class="media-body">
                           <p>
                             Menu Category:{{ $menu->menucategories->name }}
                           </p>
-                             <h6 class="mb-3"><a href="#">
-                                </a><a href="detail.html" class="text-dark">{{ $menu->name }}
+                             <h6 class="mb-3">
+                              <a  class="text-dark">{{ $menu->name }}
                                 </a>
                              </h6>
                              </p>

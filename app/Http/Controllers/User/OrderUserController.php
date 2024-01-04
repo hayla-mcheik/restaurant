@@ -10,10 +10,9 @@ class OrderUserController extends Controller
 {
 
 public function list()
-
 {
     $user = auth()->user();
-$orders = $user->orders()->get();
+$orders = $user->orders;
     return view('user.orders.list',compact('orders'));
 }
 

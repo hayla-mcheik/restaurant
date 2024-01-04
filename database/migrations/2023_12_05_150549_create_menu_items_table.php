@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('menu_category_id')->constrained('menu_categories');
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
+            $table->string('quantity')->nullable();
             $table->string('price')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();

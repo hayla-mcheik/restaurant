@@ -38,11 +38,12 @@
                             <div class="mb-3">
                                 <label>Status*</label>
                                 <select name="status" class="form-control">
-                                    <option value="pending" {{ $restaurant->status === 'pending' ? 'selected' : '' }}>Pending</option>
-                                    <option value="active" {{ $restaurant->status === 'active' ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ trim($restaurant->status) == '0' ? 'selected' : '' }}>Active</option>
+                                    <option value="1" {{ trim($restaurant->status) == '1' ? 'selected' : '' }}>Pending</option>
                                 </select>
-                                @error('status') <small>{{ $message}}</small> @enderror
+                                @error('status') <small>{{ $message }}</small> @enderror
                             </div>
+                            
                             
 
                             <div class="col-md-12 mb-3">

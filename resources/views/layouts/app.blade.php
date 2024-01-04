@@ -26,8 +26,12 @@
     <!-- Owl Carousel -->
     <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/vendor/owl-carousel/owl.theme.css') }}">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    @livewireStyles
+
     <style>
         a{
             text-decoration: none;
@@ -64,7 +68,15 @@
       <script src="{{ asset('frontend/vendor/owl-carousel/owl.carousel.js') }}"></script>
       <!-- Custom scripts for all pages-->
       <script src="{{ asset('frontend/js/custom.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+  <!-- Include jQuery -->
 
+<!-- Include Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    
+    @livewireScripts
+    @stack('scripts')
     <!-- Initialize Toastr -->
 <script>
     // Ensure Toastr is available before calling toastr() function
@@ -88,6 +100,7 @@
         alertify.notify(eventData.text, eventData.type);
     });
 </script>
+
 
 
 </body>

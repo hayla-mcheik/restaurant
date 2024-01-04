@@ -11,7 +11,8 @@ class OrderManagementController extends Controller
         
     public function index()
     {
-        $order= OrderModel::all();
+        $user = auth()->user();
+        $order= $user->restaurant->order;
         return view('manager.orders.list',compact('order'));
     }
 public function edit($id)

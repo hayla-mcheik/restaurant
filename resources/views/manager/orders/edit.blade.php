@@ -49,13 +49,13 @@
                    </a>
                    <div class="media">
                       <a href="#">
-                      <img class="mr-4" src="img/3.jpg" alt="Generic placeholder image">
+                      <img class="mr-4" src="{{ asset($orderItems->first()->menu->image) }}" alt="Generic placeholder image">
                       </a>
                       <div class="media-body">
                          <a href="#">
                          </a>
                          <h6 class="mb-3"><a href="#">
-                            </a><a href="detail.html" class="text-dark">{{ $order->name }}
+                            </a><a href="detail.html" class="text-dark">{{ $order->user->name }}
                             </a>
                          </h6>
                          <p class="text-black-50 mb-1"><i class="feather-map-pin"></i> {{ $order->address }}
@@ -192,7 +192,7 @@ foreach ($orderItems as $item) {
                          <span>Total</span>${{ $totalAmount }}
                       </li>
                    </ul>
-                   <a href="#0" class="btn btn-success btn-block">Place Order</a>
+ 
                 </div>
              </div>
           </div>

@@ -15,13 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('restaurant_id')->constrained('restaurant')->onDelete('cascade');
-            $table->string('name')->nullable();
-            $table->string('slug')->nullable();
+            $table->string('fullname')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('order_no')->nullable();
             $table->date('date')->nullable();
             $table->date('deliverydate')->nullable();
-            $table->tinyInteger('status_message')->nullable()->default('0')->comment('0=pending,1=approve,2=rejected');
+            $table->string('status_message')->nullable()->default('0')->comment('0=pending,1=approve,2=rejected');
             $table->string('payment_mode')->nullable();
             $table->string('payment_id')->nullable();
             $table->timestamps();

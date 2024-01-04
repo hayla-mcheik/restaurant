@@ -56,6 +56,14 @@ Add  Menu Items
     @error('slug') <small>{{ $message}}</small> @enderror
     </div>
 </div>
+
+<div class="col-md-6">
+    <div class="mb-3">
+        <label>Quantity*</label>
+        <input type="number" class="form-control" value="{{ old('quantity') }}" name="quantity" />
+        @error('quantity') <small>{{ $message }}</small> @enderror
+</div>
+</div>
 <div class="col-md-6">
     <div class="mb-3">
         <label>Price*</label>

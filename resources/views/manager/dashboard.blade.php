@@ -118,7 +118,7 @@ Dashboard
                   <!----><!---->
                   @forelse($orders as $order)
                   <tr>
-                     <td> {{ $order->name }}	</td>
+                     <td> {{ $order->user->name }}	</td>
                      <td> {{ $order->restaurant->name }} </td>
                      <td>
                        @switch($order->status_message)
@@ -132,7 +132,7 @@ Dashboard
                     <button disabled="" type="button" class="btn btn-sm btn-danger btn-round"> Rejected </button>
                            @break
                        @default
-                           Unknown Status
+                 Pending
                    @endswitch
                     </td>
                     <td>

@@ -23,19 +23,19 @@ class RestaurantController extends Controller
 
         return view('admin.restaurant.list',compact('restaurant'));
     }
+    
     public function edit($id)
 {
     $restaurant = RestaurantModel::find($id);
-    return view('admin.restaurant.edit', compact('restaurant')); // Use the correct view name
+    return view('admin.restaurant.edit', compact('restaurant')); 
 }
 
 public function update(Request $request, $id)
 {
     $restaurant = RestaurantModel::find($id);
-    $restaurant->status = $request->input('status') === 'active' ? '0' : '1';
+    $restaurant->status = $request->input('status') === '1' ? 'pending' : 'active';
     $restaurant->save();
     return redirect()->route('admin.restaurant.index')->with('success', 'Restaurant status has been updated successfully');
 }
-
 
 }

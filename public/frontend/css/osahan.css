@@ -69,7 +69,7 @@ img{
 }
 .dropdown-cart-top-header .img-fluid {
     border: 1px solid #dcdcdc;
-    border-radius: 3px;
+    border-radius: 3px !important;
     float: left;
     height: 59px;
     padding: 3px;
@@ -85,7 +85,7 @@ img{
 }
 .food-item {
     border: 1px solid;
-    border-radius: 2px;
+    border-radius: 2px !important;
     display: inline-block;
     font-size: 6px;
     height: 13px;
@@ -118,7 +118,7 @@ img{
     font-size: 0.9rem;
     letter-spacing: 0.05rem;
     padding: 0.75rem 1rem;
-    border-radius: 2rem;
+    border-radius: 2rem !important;
 }
 .form-label-group {
     position: relative;
@@ -127,7 +127,7 @@ img{
 .form-label-group>input,
 .form-label-group>label {
     padding: 15px 0;
-    border-radius: 0px;
+    border-radius: 0px !important;
     height: 51px;
     background: transparent !important;
     border: none;
@@ -147,7 +147,7 @@ img{
     cursor: text;
     /* Match the input under the label */
     border: 1px solid transparent;
-    border-radius: .25rem;
+    border-radius: .25rem !important;
     transition: all .1s ease-in-out;
 }
 .form-label-group input::-webkit-input-placeholder {
@@ -200,7 +200,7 @@ img{
     color: #666;
     font-size: 12px;
     padding: 7px 10px;
-    border-radius: 3px;
+    border-radius: 3px !important;
     position: absolute;
     right: 14px;
     top: 9px;
@@ -223,7 +223,7 @@ img{
 }
 .homepage-search-form .select2-selection {
     border-color: #ced4da !important;
-    border-radius: 0.25rem !important;
+    border-radius: 0.25rem !important ;
     height: 50px !important;
     outline: none !important;
 }
@@ -239,7 +239,7 @@ img{
 .select2-dropdown{
     margin: -2px 0 0 0;
     border: 1px solid #ced4da;
-    border-radius: 3px;
+    border-radius: 3px !important;
 }
 .select2-container--default .select2-search--dropdown .select2-search__field{
    border: 1px solid #ced4da;
@@ -258,7 +258,7 @@ img{
 .osahan-category-item {
     background: #fff;
     margin: 5px 2px;
-    border-radius: 3px;
+    border-radius: 3px !important;
     overflow: hidden;
     text-align: center;
     padding: 7px;
@@ -281,13 +281,13 @@ img{
     width: 40px;
     height: 40px;
     object-fit: cover;
-    border-radius: 50px;
+    border-radius: 50px !important;
     box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
     margin: 2px 0 8px 0;
 }
 .line {
     background-color: #5e5e5e;
-    border-radius: 12px;
+    border-radius: 12px !important;
     display: inline-table;
     height: 4px;
     margin: 0 0 51px;
@@ -307,7 +307,7 @@ img{
 .select2-container--default .select2-selection--single {
     background-color: #fff;
     border: 1px solid #ced4da;
-    border-radius: 3px;
+    border-radius: 3px !important;
 }
 .modal-footer .btn {
     font-size: 14px;
@@ -384,35 +384,35 @@ img{
 }
 .modal-content {
     border: none;
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .btn {
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .form-control {
     font-size: 13px;
-    border-radius: 2px;
+    border-radius: 2px !important;
     min-height: 38px;
 }
 .card {
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .rounded {
     border-radius: 2px !important;
 }
 .input-group-text {
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .custom-checkbox .custom-control-label::before {
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .nav-pills .nav-link {
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .alert,
 .badge,
 .dropdown-menu {
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .input-group-sm>.custom-select,
 .input-group-sm>.form-control,
@@ -420,7 +420,7 @@ img{
 .input-group-sm>.input-group-append>.input-group-text,
 .input-group-sm>.input-group-prepend>.btn,
 .input-group-sm>.input-group-prepend>.input-group-text {
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .bg-dark {
     background-color: #000 !important;
@@ -515,13 +515,13 @@ img{
     text-align: center;
     font-size: 15px;
     line-height: 24px;
-    border-radius: 50px;
+    border-radius: 50px !important;
 }
 /* detail */
 .count-number .btn {
     padding: 2px 5px;
     font-size: 12px;
-    border-radius: 0px;
+    border-radius: 0px !important;
 }
 .restaurant-detailed-header-left {
     text-shadow: 0px 0px 10px #000;
@@ -534,7 +534,7 @@ img{
     border: none;
     color: #fff;
     height: 24px;
-    border-radius: 0px;
+    border-radius: 0px !important;
     vertical-align: bottom;
 }
 .generator-bg {
@@ -549,8 +549,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     position: relative;
 }
 .restaurant-detailed-banner .img-fluid.cover {
-    height: 424px;
     object-fit: cover;
+    width:100%;
+    height:70vh ;
 }
 .restaurant-detailed-header {
     bottom: 0;
@@ -564,7 +565,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#d4000000', GradientType=0);
 }
 .homepage-great-deals-carousel .item img {
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .restaurant-detailed-earn-pts .img-fluid.float-left {
     height: 61px;
@@ -582,7 +583,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
 }
 .border-btn {
     border: 1px solid #dee0e6;
-    border-radius: 2px;
+    border-radius: 2px !important;
     display: inline-block;
     font-size: 14px;
     font-weight: 500;
@@ -590,7 +591,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     margin: 0 0 10px 0;
 }
 .restaurant-detailed-ratings .generator-bg {
-    border-radius: 4px;
+    border-radius: 4px !important;
     display: inline-block;
     font-size: 12px;
     height: 20px;
@@ -614,7 +615,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
 }
 .mall-category-item {
     border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 3px;
+    border-radius: 3px !important;
     margin: 0 6px;
     overflow: hidden;
     text-align: center;
@@ -641,7 +642,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     background: #ececec;
     color: #f32129;
     padding: 1px 6px;
-    border-radius: 2px;
+    border-radius: 2px !important;
     font-size: 10px;
 }
 .mall-category-item:hover small {
@@ -649,7 +650,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     color: #ffffff;
 }
 .address-map {
-    border-radius: 2px;
+    border-radius: 2px !important;
     overflow: hidden;
 }
 .new-arrivals-card .card-img .new-arrivals {
@@ -659,7 +660,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
 }
 .new-arrivals {
     background: #000 none repeat scroll 0 0;
-    border-radius: 2px;
+    border-radius: 2px !important;
     color: #fff;
     padding: 1px 13px;
     text-transform: uppercase;
@@ -679,7 +680,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
 }
 .total-like {
     border: 1px solid;
-    border-radius: 50px;
+    border-radius: 50px !important;
     display: inline-block;
     font-weight: 500;
     height: 34px;
@@ -695,7 +696,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
 }
 .progress {
     background: #f2f4f8 none repeat scroll 0 0;
-    border-radius: 0;
+    border-radius: 0 !important;
     height: 30px;
 }
 .rating-list {
@@ -747,14 +748,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     margin-top: 12px;
 }
 .restaurant-detailed-header-right .btn-success {
-    border-radius: 3px;
+    border-radius: 3px !important;
     height: 45px;
     margin: -18px 0 18px;
     min-width: 130px;
     padding: 7px;
 }
-.text-black {
-    color: #000000;
+.text-000 {
+    color: #000000 !important;
+    font-weight: 600;
+    font-size: 1rem;
 }
 .icon-overlap {
     bottom: -23px;
@@ -771,7 +774,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
 .restaurant-detailed-header-left img {
     width: 88px;
     height: 88px;
-    border-radius: 3px;
+    border-radius: 3px !important;
     object-fit: cover;
     box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important;
 }
@@ -801,7 +804,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     text-align: center;
     line-height: 29px;
     font-size: 15px;
-    border-radius: 50px;
+    border-radius: 50px !important;
     margin: 0 7px 0 0px;
     color: #fff;
 }
@@ -834,7 +837,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     width: 47px;
 }
 .order-list .btn {
-    border-radius: 2px;
+    border-radius: 2px !important;
     min-width: 121px;
     font-size: 13px;
     padding: 7px 0 7px 0;
@@ -853,7 +856,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     text-align: center;
     line-height: 29px;
     font-size: 15px;
-    border-radius: 50px;
+    border-radius: 50px !important;
     margin: 0 7px 0 0px;
     color: #fff;
 }
@@ -877,7 +880,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     margin: 0 0 19px 0;
     font-size: 15px;
     padding: 6px 10px 6px 6px;
-    border-radius: 2px;
+    border-radius: 2px !important;
     background: #fffae6;
     position: relative;
 }
@@ -886,7 +889,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     object-fit: cover;
     width: 22px;
     margin: 0 8px 0 0;
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .card.offer-card h5:after {
     border-left: 4px solid transparent;
@@ -922,7 +925,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3008', end
     height: 70px;
     object-fit: cover;
     box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075)!important;
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .osahan-cart-item p.text-gray.float-right {
     margin: 3px 0 0 0;
@@ -1049,7 +1052,7 @@ footer {
 }
 .navbar-toggler {
     padding: 5px 8px;
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .osahan-nav .nav-link {
     margin: 0px;
@@ -1214,7 +1217,7 @@ p{
 }
 .navbar-toggler {
     padding: 5px 8px;
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .osahan-nav .nav-link {
     margin: 0px;
@@ -1328,7 +1331,7 @@ p{
 }
 .navbar-toggler {
     padding: 5px 8px;
-    border-radius: 2px;
+    border-radius: 2px !important;
 }
 .osahan-nav .nav-link {
     margin: 0px;
@@ -1436,5 +1439,22 @@ p{
     }
 }
 /* Extra large devices (large desktops, 1200px and up) */
- @media (min-width: 1200px) {
+ @media (min-width: 768px) {
+    .dropdown-cart-top{
+        width: 300px;
+    }
+}
+
+.favourite-heart a{
+    color:#f32129 !important;
+}
+
+/* .owl-carousel .owl-dots.disabled, .owl-carousel .owl-nav.disabled{
+    display: block !important;
+} */
+.list-card .favourite-heart i{
+    color:#ff3008;
+}
+.text-red{
+color:#ff3008;
 }
