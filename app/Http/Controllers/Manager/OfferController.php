@@ -56,7 +56,6 @@ class OfferController extends Controller
         
             $validatedData['image']= $imagePath;
         }
-        // Create the offer
         $offer = Offer::create($validatedData);
         if ($request->has('menu_items')) {
             $offer->menuItems()->attach($request->menu_items);
@@ -76,10 +75,8 @@ class OfferController extends Controller
 
     public function update(Request $request, $offer)
     {
-        // Find the offer by ID
         $offer = Offer::find($offer);
-    
-        // Validate input data
+
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'required|string',
@@ -95,9 +92,7 @@ class OfferController extends Controller
         $user = auth()->user();
         $validatedData['restaurant_id'] = $user->restaurant->id;
         $validatedData['is_published'] = $request->has('is_published');
-        // Update image if a new one is provided
         if ($request->hasFile('image') && $offer->image) {
-            // Delete the old image file
             if (file_exists($offer->image)) {
                 unlink($offer->image);
             }
@@ -109,15 +104,11 @@ class OfferController extends Controller
     
             $validatedData['image'] = $imagePath;
         }
-    
-        // Update the offer
+
         $offer->update($validatedData);
-    
-        // Sync menu items (detach existing, attach new)
         if ($request->has('menu_items')) {
             $offer->menuItems()->sync($request->menu_items);
         } else {
-            // If no menu items are provided, detach all existing items
             $offer->menuItems()->detach();
         }
     

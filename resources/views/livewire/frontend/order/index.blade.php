@@ -41,6 +41,19 @@
    </div>
 </div>
 
+@if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+    </div>
+@endif
+
+@if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('error') }}
+    </div>
+@endif
+
+
 <div class="bg-white rounded shadow-sm p-4 mb-4">
    <h4 class="mb-1">Choose a delivery address</h4>
 <div class="row">
@@ -102,7 +115,6 @@
       </div>
       <div class="col-sm-8 pl-0">
          <div class="tab-content h-100" id="v-pills-tabContent">
-
             <div class="tab-pane fade" id="v-pills-cash" role="tabpanel" aria-labelledby="v-pills-cash-tab">
                <h6 class="mb-3 mt-0 mb-3">Cash</h6>
                <p>Please keep exact change handy to help us serve you better</p>
@@ -130,11 +142,11 @@
                </div>
            @endif
 
-           <form id="checkout-form" method="post" action="{{ route('stripe.post') }}">
+           <form id="checkout-form" method="post" action="{{ route('stripe.post') }}" wire:ignore>
             @csrf
-            <input type="hidden" name="stripeToken" id="stripe-token-id">
+            <input type="hidden" name="stripeToken" id="stripe-token-id" >
             <br>
-            <div id="card-element" class="form-control" wire:ignore></div>
+            <div id="card-element" class="form-control" ></div>
             <button id="pay-btn" class="btn btn-success mt-3" type="button" style="margin-top: 20px; width: 100%; padding: 7px;" onclick="createToken()">PAY $10</button>
         </form>
         
@@ -155,6 +167,12 @@
 @push('scripts')
 <!-- Add this script in your Blade template -->
 <script>
+       document.getElementById('checkout-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default submission
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        document.getElementById('checkout-form').appendChild(document.createElement('input')).value = csrfToken;
+        document.getElementById('checkout-form').submit(); // Submit with CSRF token
+    });
 function selectedAddress(event, addressId) {
     event.stopPropagation();
         // Remove 'btn-success' class and border from all buttons and cards

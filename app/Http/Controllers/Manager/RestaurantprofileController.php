@@ -19,7 +19,6 @@ class RestaurantprofileController extends Controller
 
     public function update(Request $request)
     {
-        // Validate the request
         $validatedData = $request->validate([
             'category_id' => 'required|exists:restaurant_categories,id',
             'name' => 'required|string|max:255',

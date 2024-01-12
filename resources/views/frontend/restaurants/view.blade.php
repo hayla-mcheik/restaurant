@@ -265,7 +265,7 @@
                              <h5 class="mb-1">All Ratings and Reviews</h5>
                              <div class="reviews-members pt-4 pb-4">
                                 <div class="media">
-                                   <a href="#"><img alt="Generic placeholder image" src="img/user/1.png" class="mr-3 rounded-pill"></a>
+                                   <a href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/1.png') }}" class="mr-3 rounded-pill"></a>
                                    <div class="media-body">
                                       <div class="reviews-members-header">
                                          <span class="star-rating float-right">
@@ -284,10 +284,10 @@
                                       <div class="reviews-members-footer">
                                          <a class="total-like" href="#"><i class="icofont-thumbs-up"></i> 856M</a> <a class="total-like" href="#"><i class="icofont-thumbs-down"></i> 158K</a> 
                                          <span class="total-like-user-main ml-2" dir="rtl">
-                                         <a data-toggle="tooltip" data-placement="top" title="Gurdeep Osahan" href="#"><img alt="Generic placeholder image" src="img/user/5.png" class="total-like-user rounded-pill"></a>
-                                         <a data-toggle="tooltip" data-placement="top" title="Gurdeep Singh" href="#"><img alt="Generic placeholder image" src="img/user/2.png" class="total-like-user rounded-pill"></a>
-                                         <a data-toggle="tooltip" data-placement="top" title="Askbootstrap" href="#"><img alt="Generic placeholder image" src="img/user/3.png" class="total-like-user rounded-pill"></a>
-                                         <a data-toggle="tooltip" data-placement="top" title="Osahan" href="#"><img alt="Generic placeholder image" src="img/user/4.png" class="total-like-user rounded-pill"></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Gurdeep Osahan" href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/5.png') }}" class="total-like-user rounded-pill"></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Gurdeep Singh" href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/2.png') }}" class="total-like-user rounded-pill"></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Askbootstrap" href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/3.png') }}" class="total-like-user rounded-pill"></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Osahan" href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/4.png') }}" class="total-like-user rounded-pill"></a>
                                          </span>
                                       </div>
                                    </div>
@@ -296,7 +296,7 @@
                              <hr>
                              <div class="reviews-members pt-4 pb-4">
                                 <div class="media">
-                                   <a href="#"><img alt="Generic placeholder image" src="img/user/6.png" class="mr-3 rounded-pill"></a>
+                                   <a href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/6.png') }}" class="mr-3 rounded-pill"></a>
                                    <div class="media-body">
                                       <div class="reviews-members-header">
                                          <span class="star-rating float-right">
@@ -315,10 +315,10 @@
                                       <div class="reviews-members-footer">
                                          <a class="total-like" href="#"><i class="icofont-thumbs-up"></i> 88K</a> <a class="total-like" href="#"><i class="icofont-thumbs-down"></i> 1K</a> 
                                          <span class="total-like-user-main ml-2" dir="rtl">
-                                         <a data-toggle="tooltip" data-placement="top" title="Gurdeep Osahan" href="#"><img alt="Generic placeholder image" src="img/user/5.png" class="total-like-user rounded-pill"></a>
-                                         <a data-toggle="tooltip" data-placement="top" title="Gurdeep Singh" href="#"><img alt="Generic placeholder image" src="img/user/2.png" class="total-like-user rounded-pill"></a>
-                                         <a data-toggle="tooltip" data-placement="top" title="Askbootstrap" href="#"><img alt="Generic placeholder image" src="img/user/3.png" class="total-like-user rounded-pill"></a>
-                                         <a data-toggle="tooltip" data-placement="top" title="Osahan" href="#"><img alt="Generic placeholder image" src="img/user/4.png" class="total-like-user rounded-pill"></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Gurdeep Osahan" href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/5.png')}}" class="total-like-user rounded-pill"></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Gurdeep Singh" href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/2.png')}}" class="total-like-user rounded-pill"></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Askbootstrap" href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/3.png')}}" class="total-like-user rounded-pill"></a>
+                                         <a data-toggle="tooltip" data-placement="top" title="Osahan" href="#"><img alt="Generic placeholder image" src="{{ asset('frontend/img/user/4.png')}}" class="total-like-user rounded-pill"></a>
                                          </span>
                                       </div>
                                    </div>
@@ -356,7 +356,7 @@
               <div class="col-md-4">
                  <div class="pb-2">
                  <div class="bg-white rounded shadow-sm text-white mb-4 p-4 clearfix restaurant-detailed-earn-pts card-icon-overlap">
-                    <img class="img-fluid float-left mr-3" src="img/earn-score-icon.png">
+                    <img class="img-fluid float-left mr-3" src="{{ asset('frontend/img/earn-score-icon.png')}}">
                     <h6 class="pt-0 text-primary mb-1 font-weight-bold">OFFER</h6>
                     <p class="mb-0">60% off on orders above $99 | Use coupon <span class="text-danger font-weight-bold">OSAHAN50</span></p>
                     <div class="icon-overlap">

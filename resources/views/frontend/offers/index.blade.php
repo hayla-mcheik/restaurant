@@ -17,13 +17,20 @@
              <div class="card offer-card border-0 shadow-sm">
                 <div class="card-body">
                    <h5 class="card-title"><img src="{{ asset($offer->image) }}">{{ $offer->name }}</h5>
+                   @if ($offer->discount_type === 'percentage')
                    <h6 class="card-subtitle mb-2 text-block">Get {{ $offer->discount_value }}% OFF on your 
                     @foreach ($offer->menuItems as $menuItem)
                     {{ $menuItem->name }},
                 @endforeach           
             </h6>
 
-            
+            @elseif ($offer->discount_type === 'fixed_amount')
+            <h6 class="card-subtitle mb-2 text-block">Get items with only {{ $offer->discount_value }}$ on your 
+               @foreach ($offer->menuItems as $menuItem)
+               {{ $menuItem->name }},
+           @endforeach           
+       </h6>
+            @endif
             <p>Menu Categories:
                 @foreach ($offer->menuItems as $menuItem)
                     {{ $menuItem->menucategories->name }},

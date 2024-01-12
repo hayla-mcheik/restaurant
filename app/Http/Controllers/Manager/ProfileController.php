@@ -14,13 +14,10 @@ class ProfileController extends Controller
         return view('manager.profile', compact('owner'));
     }
 
-// ProfileController.php
-
 public function updateprofile(Request $request)
 {
    $owner = auth()->user();
 
-    // Validate the form data
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255|unique:users,email,' . $owner->id,
@@ -29,7 +26,6 @@ public function updateprofile(Request $request)
         'info' => 'required|string|min:8',
     ]);
 
-    // Update user data
     $owner->name = $request->input('name');
     $owner->email = $request->input('email');
     $owner->phone = $request->input('phone');

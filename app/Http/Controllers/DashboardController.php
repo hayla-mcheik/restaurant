@@ -33,8 +33,8 @@ class DashboardController extends Controller
       $menuCategories = $restaurant->menuCategories();
       $totalMenuCategories = $menuCategories->count();
       $menuCategories = $restaurant->menuCategories;
-      $menuItems = $menuCategories->flatMap->menuItems; // To get all menu items
-      $menuItemCount = $menuCategories->flatMap->menuItems->count(); // To get the count of menu items     
+      $menuItems = $menuCategories->flatMap->menuItems;
+      $menuItemCount = $menuCategories->flatMap->menuItems->count(); 
       }
       else
       {
@@ -46,7 +46,7 @@ class DashboardController extends Controller
     }
     public function userdashboard()
     {
-        $orders = null; // Initialize $orders outside the if block
+        $orders = null; 
     
         if (auth()->user()) {
             $user = auth()->user();

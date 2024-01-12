@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator; // Add this line
-use App\Models\Subscriptions; // Update this line
+use Illuminate\Support\Facades\Validator;
+use App\Models\Subscriptions;
 use App\Mail\SubscriptionConfirmation; 
 use Illuminate\Support\Facades\Mail;
 class SubscriptionController extends Controller
@@ -20,7 +20,7 @@ class SubscriptionController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors()->first(), 400);
         } else {
-            $subscriber = new Subscriptions(); // Update the model reference
+            $subscriber = new Subscriptions();
             $subscriber->email = $request->email;
             $subscriber->save();
 

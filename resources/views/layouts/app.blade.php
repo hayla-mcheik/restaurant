@@ -48,6 +48,7 @@
 @include('layouts.frontend.navbar')
 
         <main>
+            
             @yield('content')
         </main>
 

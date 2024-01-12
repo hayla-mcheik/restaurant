@@ -2,8 +2,6 @@
 
 <div>
     <div class="row">
-<!-- Your other HTML code -->
-
 <h5 class="mb-4 mt-3 col-md-12">Best Sellers</h5>
 
 @foreach($bestSeller as $item)
@@ -77,8 +75,6 @@
     @endif
 
 @endforeach
-
-<!-- Your other HTML code -->
 
     
     </div>

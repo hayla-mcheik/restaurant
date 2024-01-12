@@ -39,8 +39,7 @@ class Showorders extends Component
                 'status' => 200,
             ]);
         }
-    
-        // Livewire will automatically rerender the component after the quantity change
+
     }
     
 
@@ -48,13 +47,12 @@ class Showorders extends Component
     {
         $order = CartItem::findOrFail($orderId);
     
-        // Assume you want to increment the quantity if any menuItem quantity is greater than the order quantity
         $increment = false;
     
         foreach ($order->menuitems as $menuItem) {
             if ($menuItem->quantity > $order->quantity) {
                 $increment = true;
-                break; // Exit the loop once the condition is met for any menuItem
+                break;
             }
         }
     
@@ -75,7 +73,6 @@ class Showorders extends Component
             ]);
         }
     
-        // Livewire will automatically rerender the component after the quantity change
     }
     
     
@@ -96,8 +93,7 @@ class Showorders extends Component
                     });
                 }
             });
-        
-            // Livewire will automatically rerender the component after the updates
+
         }
     }
     
@@ -106,13 +102,10 @@ class Showorders extends Component
     {
         $order = CartItem::findOrFail($orderId);
 
-        // Remove the cart item
         $order->delete();
 
-        // Update orders and subtotal after removing the item
         $this->updateOrdersAndSubtotal();
 
-        // Dispatch messages or perform any other actions if needed
         $this->dispatch('CartAddedUpdated');
         $this->dispatch('message', [
             'text'   => 'Item removed from the cart.',

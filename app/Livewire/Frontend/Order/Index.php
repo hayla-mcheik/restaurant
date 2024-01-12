@@ -9,7 +9,7 @@ use App\Models\Orderitems;
 use App\Models\CartItem;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Stripe\PaymentIntent; // Add this import
+use Stripe\PaymentIntent; 
 use Exception;
 use Stripe\StripeClient;
 use Stripe\Exception\CardException;
@@ -26,23 +26,18 @@ class Index extends Component
     public $fullname , $email , $phone , $payment_mode = NULL , $payment_id = NULL;
     public $selectedAddressId;
     public $totalAmount;
-    public function rules()
-    {
-        return [
-        ];
-    }
+
     
     public function selectedAddress($addressId)
     {
         $this->selectedAddressId = $addressId;
     }
+
+    
     public function placeOrder()
     {
-
-
         $cart = CartItem::where('user_id', auth()->user()->id)->first();
         if ($this->carts->isEmpty()) {
-        // Handle the case where the cart is empty
         $this->dispatch('message', [
             'text'   => 'Cart is empty. Add items to your cart before placing an order.',
             'type'   => 'error',
@@ -50,10 +45,7 @@ class Index extends Component
         ]);
 return;
     }
-
-
-
-        $selectedAddress = auth()->user()->addresses
+       $selectedAddress = auth()->user()->addresses
             ->where('id', $this->selectedAddressId)
             ->first();
     
@@ -76,11 +68,9 @@ return;
     
         foreach ($this->carts as $cartItem) {
             foreach ($cartItem->menuitems as $menuItem) {
-                // Check if the menu item has an associated offer
-                $offers = $menuItem->offers; // Assuming a menu item can have multiple offers
+                $offers = $menuItem->offers;
     
                 foreach ($offers as $offer) {
-                    // Check if the offer has already been added to the order items
                     $existingOrderItem = Orderitems::where('order_id', $order->id)
                         ->where('menu_id', $offer->id)
                         ->first();
@@ -88,14 +78,13 @@ return;
                     if (!$existingOrderItem) {
                         Orderitems::create([
                             'order_id' => $order->id,
-                            'menu_id' => $offer->id, // Use the offer ID instead of the menu item ID
-                            'price' => $offer->discount_value, // Use the offer price
+                            'menu_id' => $offer->id,
+                            'price' => $offer->discount_value, 
                             'quantity' => $cartItem->quantity,
                         ]);
                     }
                 }
-    
-                // If no offer, add the menu item to the order items
+
                 if ($offers->isEmpty()) {
                     Orderitems::create([
                         'order_id' => $order->id,
@@ -113,6 +102,7 @@ return;
 
     public function codOrder()
     {
+        \Log::info('address id in codOrder : ' . $this->selectedAddressId);
         $this->payment_mode = 'Cash on Delivery';
         if (!$this->selectedAddressId) {
             $this->dispatch('message', [
@@ -140,7 +130,7 @@ return;
 
     public function stripePayment(Request $request)
 {
-    \Log::info('address id ' . $this->selectedAddressId);
+    \Log::info('address id in stripe payment : ' . $this->selectedAddressId);
     $selectedAddress = auth()->user()->addresses
     ->where('id', $this->selectedAddressId)
     ->first();
@@ -158,32 +148,27 @@ return;
         });
 
         
-        // Place the order
         $this->payment_mode = 'Stripe';
-        // Set the Stripe API key
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        // Create a customer on Stripe
         $customer = \Stripe\Customer::create([
             'email' => auth()->user()->email,
         ]);
 
-        // Create a Charge
         $charge = \Stripe\Charge::create([
-            'amount' => $this->totalProductAmount * 100, // convert to cents
+            'amount' => $this->totalProductAmount * 100, 
             'currency' => 'usd',
             'description' => 'Test payment from tecomsa.com.',
             'source' => $request->stripeToken,
         ]);
 
-        // Update the order with payment details
         if ($charge->status === 'succeeded') {
             $order = $this->placeOrder();
             if($order);
             {
                 $order->update([
                     'payment_id' => $charge->id,
-                    'status_message' => 'Payment successful',  // Update status
+                    'status_message' => 'Payment successful',  
                 ]);
                 Session::flash('success', 'Payment successful! Order placed.');
                 return redirect()->route('thanks');
@@ -198,7 +183,6 @@ return;
         ]);
         Session::flash('error', 'Cart is empty. Add items to your cart before placing an order.');
     }   
-        // Clear the cart or perform any other necessary actions
         CartItem::where('user_id', auth()->user()->id)->delete();
 
     return redirect()->back();

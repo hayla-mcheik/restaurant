@@ -74,6 +74,10 @@ public function addToCart(int $menuItemId)
                 }
             }
         }
+
+
+
+        
     } else {
         $this->dispatch('message', [
             'text' => 'Please login to add to cart',
@@ -93,7 +97,6 @@ private function handleItemWithoutOfferAndPriceAdjustment($menuItem)
         'price' => $discountedPrice,
     ]);
 
-    // Attach the menu item ID to the cart_item_menu_item relationship
     $cartItem->menuitems()->attach($menuItem->id, ['quantity' => $this->quantityCount]);
 
     $this->dispatch('CartAddedUpdated');
@@ -128,8 +131,6 @@ private function handleItemWithOfferAndPriceAdjustment($menuItem)
             'quantity' => $this->quantityCount,
             'price' => $discountedPrice,
         ]);
-
-        // Attach the menu item IDs to the cart_item_menu_item relationship
         $cartItem->menuitems()->attach($offerMenuItemIds, ['quantity' => $this->quantityCount]);
 
         AppliedOffer::create([
@@ -184,8 +185,7 @@ public function addToWishlist(int $menuItemId)
                         'status' => 422
                     ]);
                 } else {
-                    // Check if the item has an offer similar to the one in the wishlist
-                    $menuItem->load('offers:id'); // Ensure offers relationship is loaded
+                    $menuItem->load('offers:id');
 
                     $similarOfferInWishlist = WishlistModel::where('user_id', auth()->user()->id)
                         ->whereHas('offers', function ($query) use ($menuItem) {

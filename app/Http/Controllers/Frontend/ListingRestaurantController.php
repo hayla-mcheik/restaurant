@@ -27,18 +27,14 @@ class ListingRestaurantController extends Controller
             return $category->menuitems;
         });
         $mostPopularCategories = $menuItems->isNotEmpty() ? $menuItems->first()->mostPopularCategories() : collect();    
-        // Fetch best-selling items with associated offers
         $bestSeller = $menuItems->map(function ($item) {
             return [
                 'item' => $item,
                 'best_seller' => $item->bestSeller(),
-                'offers' => $item->offers, // Eager load offers
+                'offers' => $item->offers,
             ];
         });
     
         return view('frontend.restaurants.view', compact('restaurant','menucategories','menuItems','mostPopularCategories', 'bestSeller','gallery'));
-    }
-    
-    
-
+    }   
 }

@@ -9,19 +9,13 @@ class WishlistController extends Controller
 {
     public function index()
     {
-        // Retrieve the authenticated user
         $user = auth()->user();
 
-        // Check if the user is authenticated
         if ($user) {
-            // Fetch wishlist items related to the authenticated user
             $wishlist = $user->wishlist;
-
-            // Pass the wishlist items to the view
             return view('user.wishlist.index', compact('wishlist'));
         } else {
-            // Handle the case where the user is not authenticated
-            return redirect()->route('login'); // Redirect to the login page or handle as needed
+            return redirect()->route('login'); 
         }
     }
 

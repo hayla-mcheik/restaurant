@@ -48,10 +48,7 @@ class ProfileUserController extends Controller
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $fileName = time() . rand(1000, 50000) . '.' . $image->getClientOriginalExtension();
-                $image->move('upload/user', $fileName);
-                
-                \Illuminate\Support\Facades\Log::info('Image moved successfully. File name: ' . $fileName);
-                
+                $image->move('upload/user', $fileName);  
                 $imagePath = 'upload/user/' . $fileName;
                 $userData['image'] = $imagePath;
             }

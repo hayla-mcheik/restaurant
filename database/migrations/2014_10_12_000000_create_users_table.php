@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('info')->nullable();
             $table->tinyInteger('role_as')->default('1')->comment('1=admin,2=manager,3=user');
             $table->string('status')->default('pending')->comment('pending, approved');
+            $table->string('api_token', 80)->unique()->nullable()->default(null);
             $table->rememberToken();
             $table->timestamps();
         });

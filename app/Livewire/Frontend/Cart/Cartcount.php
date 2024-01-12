@@ -16,7 +16,7 @@ class Cartcount extends Component
             $this->cartCount = $this->cartItems->count();
         } else {
             $this->cartCount = 0;
-            $this->cartItems = collect(); // Set an empty collection for guest users
+            $this->cartItems = collect(); 
         }
     }
 
